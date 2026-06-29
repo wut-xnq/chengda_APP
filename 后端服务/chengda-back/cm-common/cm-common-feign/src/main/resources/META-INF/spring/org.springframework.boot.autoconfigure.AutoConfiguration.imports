@@ -1,0 +1,3 @@
+com.jiaolong.cm.common.feign.CmFeignAutoConfiguration
+com.jiaolong.cm.common.feign.sentinel.SentinelAutoConfiguration
+com.jiaolong.cm.common.feign.sentinel.handle.GlobalBizExceptionHandler

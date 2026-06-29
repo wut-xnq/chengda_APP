@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmProductSpecMapper">
+
+    <select id="selectListByProductId" resultType="com.jiaolong.cm.consu.api.dto.ProductSpecDto"
+            parameterType="java.lang.Long">
+		select cs.id, cs.spec_name, cs.merchant_id, cs.group_id, cs.create_time, cs.state, csg.group_name, cmi.merchant_name
+		from cm_product_spec cps
+		left join cm_specification cs on cps.spec_id = cs.id
+		left join cm_specification_group csg on cs.group_id = csg.id
+		left join cm_merchant_info cmi on cs.merchant_id = cmi.id
+		where cs.state = '1' and cs.deleted = '0' and cps.product_id = #{productId}
+	</select>
+</mapper>

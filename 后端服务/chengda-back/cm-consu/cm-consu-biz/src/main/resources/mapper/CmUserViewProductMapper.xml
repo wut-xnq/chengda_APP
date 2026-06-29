@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmUserViewProductMapper">
+
+	<select id="getRecord" resultType="com.jiaolong.cm.consu.api.entity.CmUserViewProduct">
+		select user_id, product_id, view_time
+		from cm_user_view_product where user_id = #{userId} and product_id = #{productId}
+	</select>
+
+	<insert id="insertRecord" parameterType="com.jiaolong.cm.consu.api.entity.CmUserViewProduct">
+		insert into cm_user_view_product (user_id, product_id, view_time)
+		values (#{record.userId}, #{record.productId}, #{record.viewTime})
+	</insert>
+
+	<update id="updateViewTime" parameterType="com.jiaolong.cm.consu.api.entity.CmUserViewProduct">
+		update cm_user_view_product set view_time = #{record.viewTime}
+		where user_id = #{record.userId} and product_id = #{record.productId}
+	</update>
+</mapper>

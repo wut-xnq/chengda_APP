@@ -1,0 +1,9 @@
+com.jiaolong.cm.common.security.service.CmUserDetailsServiceImpl
+com.jiaolong.cm.common.security.service.CmCustomerDetailsServiceImpl
+com.jiaolong.cm.common.security.service.CmMerchantDetailsServiceImpl
+com.jiaolong.cm.common.security.service.CmAppUserDetailsServiceImpl
+com.jiaolong.cm.common.security.service.CmRedisOAuth2AuthorizationService
+com.jiaolong.cm.common.security.service.CmRedisOAuth2AuthorizationConsentService
+com.jiaolong.cm.common.security.component.CmSecurityInnerAspect
+com.jiaolong.cm.common.security.component.CmSecurityMessageSourceConfiguration
+com.jiaolong.cm.common.security.service.CmRemoteRegisteredClientRepository

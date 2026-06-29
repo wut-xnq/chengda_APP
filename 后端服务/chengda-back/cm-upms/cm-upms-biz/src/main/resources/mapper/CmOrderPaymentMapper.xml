@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.admin.mapper.CmOrderPaymentMapper">
+
+	<update id="deleteOrderById">
+		update cm_order_payment set deleted = '1' where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

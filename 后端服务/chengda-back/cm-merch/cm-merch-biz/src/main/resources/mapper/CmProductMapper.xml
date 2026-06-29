@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmProductMapper">
+
+	<select id="getPageList" resultType="com.jiaolong.cm.merch.api.dto.ProductDto">
+		select cp.id, cp.create_time, cp.product_name, cp.product_code, cp.product_pics, cp.min_price, cp.if_shipped,
+		       cp.logistic_id, cp.shelve_area,cp.shelve_state, cp.shelve_area, cp.brand_name, cp.product_classify,
+		       cp.product_specs, cp.labels, cp.merchant_id, cmi.merchant_name, cp.product_text
+		from cm_product cp left join cm_merchant_info cmi on cp.merchant_id = cmi.id
+		where cp.deleted = '0' and cmi.deleted = '0'
+		<if test="vo.merchantId != null">
+			and cp.merchant_id = #{vo.merchantId}
+		</if>
+		<if test="vo.productName != null and vo.productName != ''">
+			and cp.product_name like concat('%', #{vo.productName}, '%')
+		</if>
+		<if test="vo.productClassify != null and vo.productClassify != ''">
+			and cp.product_classify like concat('%', #{vo.productClassify}, '%')
+		</if>
+		<if test="vo.shelveState != null and vo.shelveState != ''">
+			and cp.shelve_state = #{vo.shelveState}
+		</if>
+		<if test="vo.shelveArea != null">
+			and cp.shelve_area = #{vo.shelveArea}
+		</if>
+		<if test="vo.minPrice != null and vo.minPrice != ''">
+			and cp.min_price &gt;= cast(#{vo.minPrice} as DECIMAL)
+		</if>
+		<if test="vo.maxPrice != null and vo.maxPrice != ''">
+			and cp.min_price &lt; cast(#{vo.maxPrice} as DECIMAL)
+		</if>
+		order by cp.create_time desc
+	</select>
+
+	<select id="getProductDetailById" resultType="com.jiaolong.cm.merch.api.dto.ProductDto">
+		select cp.id, cp.create_time, cp.product_name, cp.product_code, cp.product_pics, cp.min_price, cp.if_shipped,
+			   cp.logistic_id, cp.shelve_area,cp.shelve_state, cp.shelve_area, cp.brand_name, cp.product_classify,
+			   cp.product_specs, cp.labels, cp.merchant_id, cmi.merchant_name, cp.product_text
+		from cm_product cp left join cm_merchant_info cmi on cp.merchant_id = cmi.id
+		where cp.id = #{id}
+	</select>
+
+    <select id="getProductByMerchantId" resultType="com.jiaolong.cm.merch.api.dto.ProductListDto">
+		select id, product_name, product_code, brand_name, product_classify
+		from cm_product where deleted = '0' and merchant_id = #{merchantId}
+		order by create_time desc
+	</select>
+
+	<update id="shelveProduct">
+		update cm_product
+		<set>
+			<if test="vo.shelveState != null and vo.shelveState != ''">
+				shelve_state = #{vo.shelveState},
+			</if>
+			<if test="vo.shelveArea != null">
+				shelve_area = #{vo.shelveArea}
+			</if>
+		</set>
+		where id = #{vo.id}
+	</update>
+
+	<update id="deleteProduct">
+		update cm_product set deleted = '1' where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+
+	<update id="updateSkuStr">
+		update cm_product set product_skus = #{productSkus} where id = #{id}
+	</update>
+
+	<select id="statisticProductVolume" resultType="com.jiaolong.cm.merch.api.dto.StatisticProductQueryDto">
+		select distinct cp.id as productId,cp.product_name as productName, sum(cop.amount) over(partition by cp.id) as volume
+		from cm_product cp
+		left join cm_product_sku cps on cp.id = cps.product_id
+		left join cm_order_products cop on cop.sku_id = cps.id
+		left join cm_order_shopping cos on cos.id = cop.order_id
+		where cos.payment_state = 3 and cp.merchant_id = #{merchantId} and cop.create_time &gt; #{start}
+		order by volume desc
+		<if test="limitNum != null">
+			limit #{limitNum}
+		</if>
+	</select>
+</mapper>

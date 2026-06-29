@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/IconSelector/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726894139173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726894139173,
+            "name": "Commit-0",
+            "content": "import { readFileSync, readdirSync } from 'fs';\n\nlet idPerfix = '';\nconst iconNames: string[] = [];\nconst svgTitle = /<svg([^>+].*?)>/;\nconst clearHeightWidth = /(width|height)=\"([^>+].*?)\"/g;\nconst hasViewBox = /(viewBox=\"[^>+].*?\")/g;\nconst clearReturn = /(\\r)|(\\n)/g;\n// 清理 svg 的 fill\nconst clearFill = /(fill=\"[^>+].*?\")/g;\n\nfunction findSvgFile(dir: string): string[] {\n\tconst svgRes = [] as any;\n\tconst dirents = readdirSync(dir, {\n\t\twithFileTypes: true,\n\t});\n\tfor (const dirent of dirents) {\n\t\ticonNames.push(`${idPerfix}-${dirent.name.replace('.svg', '')}`);\n\t\tif (dirent.isDirectory()) {\n\t\t\tsvgRes.push(...findSvgFile(dir + dirent.name + '/'));\n\t\t} else {\n\t\t\tconst svg = readFileSync(dir + dirent.name)\n\t\t\t\t.toString()\n\t\t\t\t.replace(clearReturn, '')\n\t\t\t\t.replace(clearFill, 'fill=\"\"')\n\t\t\t\t.replace(svgTitle, ($1, $2) => {\n\t\t\t\t\tlet width = 0;\n\t\t\t\t\tlet height = 0;\n\t\t\t\t\tlet content = $2.replace(clearHeightWidth, (s1: string, s2: string, s3: number) => {\n\t\t\t\t\t\tif (s2 === 'width') {\n\t\t\t\t\t\t\twidth = s3;\n\t\t\t\t\t\t} else if (s2 === 'height') {\n\t\t\t\t\t\t\theight = s3;\n\t\t\t\t\t\t}\n\t\t\t\t\t\treturn '';\n\t\t\t\t\t});\n\t\t\t\t\tif (!hasViewBox.test($2)) {\n\t\t\t\t\t\tcontent += `viewBox=\"0 0 ${width} ${height}\"`;\n\t\t\t\t\t}\n\t\t\t\t\treturn `<symbol id=\"${idPerfix}-${dirent.name.replace('.svg', '')}\" ${content}>`;\n\t\t\t\t})\n\t\t\t\t.replace('</svg>', '</symbol>');\n\t\t\tsvgRes.push(svg);\n\t\t}\n\t}\n\treturn svgRes;\n}\n\nexport const svgBuilder = (path: string, perfix = 'local') => {\n\tif (path === '') return;\n\tidPerfix = perfix;\n\tconst res = findSvgFile(path);\n\treturn {\n\t\tname: 'svg-transform',\n\t\ttransformIndexHtml(html: string) {\n\t\t\t/* eslint-disable */\n\t\t\treturn html.replace(\n\t\t\t\t'<body>',\n\t\t\t\t`\n\t\t\t\t\t<body>\n\t\t\t\t\t<svg id=\"local-icon\"\n\t\t\t\t\t\tdata-icon-name=\"${iconNames.join(',')}\"\n\t\t\t\t\t\txmlns=\"http://www.w3.org/2000/svg\" \n\t\t\t\t\t\txmlns:xlink=\"http://www.w3.org/1999/xlink\" \n\t\t\t\t\t\tstyle=\"position: absolute; width: 0; height: 0\">\n\t\t\t\t\t\t\t${res.join('')}\n\t\t\t\t\t</svg>\n\t\t\t\t`\n\t\t\t);\n\t\t\t/* eslint-enable */\n\t\t},\n\t};\n};\n"
+        }
+    ]
+}

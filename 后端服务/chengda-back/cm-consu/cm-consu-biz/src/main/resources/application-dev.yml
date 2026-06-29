@@ -1,0 +1,42 @@
+server:
+  port: 7100
+
+spring:
+  application:
+    name: consu
+  cloud:
+    nacos:
+      username: @nacos.username@
+      password: @nacos.password@
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: dev
+  config:
+    import:
+      - nacos:application.yml
+      - nacos:${spring.application.name}.yml
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+cm:
+  yunxin:
+    appkey: 19c238d29bf5d7e3653aa21c79640824
+    codeid: 27157429
+    noticeid: 27159448
+  kuaidi100:
+    key: emvvdjLN9021
+    customer: 65F252BEDB05ADF603241013E98E0AF5
+    queryUrl: https://poll.kuaidi100.com/poll/query.do
+  alipay:
+    appId: 2021005104645802
+    alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwUYO90GCm4Tq3CZ+UPFjVOEr14rqY1p5ltLchZX14UI14FgHh+6zyUIbU31QIdVUKzOP1txujpN64VgTUTOt7UZyVrJy0U4wXLo+zS+0VxNo2O5E8A7xPpps+pB1ZhxpkwAYLp4XGM3TReEBy0gu5pU5sK28ia+NHEbXmhfkqT0NtpsiW+W9GEwqMj8g9JYPJydumADPE8VBKt42Q3hqtSlvmIPISWRldFiTw7BTf3yexvuPi3kWFMHz3TfzB3Q2EQBe4lFzvidrhAfU6iyyluhRs87Rj6pwSeRGZ+jaIySxjR/NE7GJSk9624o+M4hXq3PgtbJvub9S6YEXlxK/bwIDAQAB
+    signType: RSA2
+    charset: utf-8
+    gatewayUrl: https://openapi.alipay.com/gateway.do
+    notifyUrl: /api/consu/alipay/notify
+    returnUrl: /api/consu/alipay/payResult

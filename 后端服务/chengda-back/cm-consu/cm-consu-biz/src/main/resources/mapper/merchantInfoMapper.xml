@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmMerchantInfoMapper">
+
+	<select id="selectNameList" resultType="java.lang.String">
+		select merchant_name from cm_merchant_info where id in
+			<foreach collection="ids" item="id" separator="," index="i" open="(" close=")">
+				#{id}
+			</foreach>
+	</select>
+
+	<select id="getNameListAll" resultType="com.jiaolong.cm.consu.api.dto.MerchantListDto">
+		select id, merchant_name from cm_merchant_info where state = '1' and verified = '2' and deleted = '0'
+	</select>
+
+    <select id="getMerchantByPhone" resultType="com.jiaolong.cm.consu.api.entity.CmMerchantInfo">
+		select id, merchant_name, create_time, charge_person_name, charge_person_phone, logo, credit_code, brief, province_code, city_code,
+			   country_code, address, merchant_pics, staff_count, state, merchant_score, verified, update_time, deleted
+		from cm_merchant_info where charge_person_phone = #{phone}
+	</select>
+
+    <update id="updateMerchantScore">
+		update cm_merchant_info set merchant_score = #{score} where id = #{id}
+	</update>
+</mapper>

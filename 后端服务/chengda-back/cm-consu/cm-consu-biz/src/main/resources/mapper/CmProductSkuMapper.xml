@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmProductSkuMapper">
+
+	<select id="selectOnlySku" resultType="com.jiaolong.cm.consu.api.entity.CmProductSku">
+		select id,sku_name,product_id,create_time,origin_price,current_price,sku_pics,
+			   amount,limit_amount,if_default,update_time,sort_order
+		from cm_product_sku
+		where state = '1' and deleted = '0' and product_id = #{productId}
+		order by current_price asc limit 1
+	</select>
+</mapper>

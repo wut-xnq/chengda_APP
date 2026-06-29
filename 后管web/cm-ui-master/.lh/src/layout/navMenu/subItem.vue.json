@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/layout/navMenu/subItem.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1726892033876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726892055574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \t\t</el-sub-menu>\n \t\t<template v-else>\n \t\t\t<el-menu-item :index=\"val.path\" :key=\"val.path\">\n \t\t\t\t<template v-if=\"!val.meta.isLink || (val.meta.isLink && val.meta.isIframe)\">\n-\t\t\t\t\t<!-- <SvgIcon :name=\"val.meta.icon\" /> -->\n+\t\t\t\t\t<SvgIcon :name=\"val.meta.icon\" />\n \t\t\t\t\t<span>{{ other.setMenuI18n(val) }}</span>\n \t\t\t\t</template>\n \t\t\t\t<template v-else>\n \t\t\t\t\t<a class=\"w100\" @click.prevent=\"onALinkClick(val)\">\n"
+                }
+            ],
+            "date": 1726892033876,
+            "name": "Commit-0",
+            "content": "<template>\n\t<template v-for=\"val in chils\">\n\t\t<el-sub-menu :index=\"val.path\" :key=\"val.path\" v-if=\"val.children && val.children.length > 0\">\n\t\t\t<template #title>\n\t\t\t\t<SvgIcon :name=\"val.meta.icon\" />\n\t\t\t\t<span>{{ other.setMenuI18n(val) }}</span>\n\t\t\t</template>\n\t\t\t<sub-item :chil=\"val.children\" />\n\t\t</el-sub-menu>\n\t\t<template v-else>\n\t\t\t<el-menu-item :index=\"val.path\" :key=\"val.path\">\n\t\t\t\t<template v-if=\"!val.meta.isLink || (val.meta.isLink && val.meta.isIframe)\">\n\t\t\t\t\t<!-- <SvgIcon :name=\"val.meta.icon\" /> -->\n\t\t\t\t\t<span>{{ other.setMenuI18n(val) }}</span>\n\t\t\t\t</template>\n\t\t\t\t<template v-else>\n\t\t\t\t\t<a class=\"w100\" @click.prevent=\"onALinkClick(val)\">\n\t\t\t\t\t\t<SvgIcon :name=\"val.meta.icon\" />\n\t\t\t\t\t\t{{ other.setMenuI18n(val) }}\n\t\t\t\t\t</a>\n\t\t\t\t</template>\n\t\t\t</el-menu-item>\n\t\t</template>\n\t</template>\n</template>\n\n<script setup lang=\"ts\" name=\"navMenuSubItem\">\nimport { computed } from 'vue';\nimport { RouteRecordRaw } from 'vue-router';\nimport other from '/@/utils/other';\n\n// 定义父组件传过来的值\nconst props = defineProps({\n\t// 菜单列表\n\tchil: {\n\t\ttype: Array<RouteRecordRaw>,\n\t\tdefault: () => [],\n\t},\n});\n\n// 获取父级菜单数据\nconst chils = computed(() => {\n\treturn <RouteItems>props.chil;\n});\n// 打开外部链接\nconst onALinkClick = (val: RouteItem) => {\n\tother.handleOpenLink(val);\n};\n</script>\n"
+        }
+    ]
+}

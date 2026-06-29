@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmSpecGroupMapper">
+
+	<select id="getListByMerchantId" resultType="com.jiaolong.cm.merch.api.dto.SpecGroupDto">
+		select id, group_name from cm_specification_group where deleted = '0' and merchant_id = #{merchantId}
+	</select>
+
+	<select id="getByName" resultType="com.jiaolong.cm.merch.api.entity.CmSpecificationGroup">
+		select id, merchant_id, create_time, group_name, deleted
+		from cm_specification_group where merchant_id = #{merchantId} and group_name = #{groupName}
+	</select>
+
+	<update id="deleteSpecGroupById">
+		update cm_specification_group set deleted = '1' where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator="," index=",">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

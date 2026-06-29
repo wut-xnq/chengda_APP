@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.admin.mapper.CmTestInfoMapper">
+
+	<select id="selectListPage" resultType="com.jiaolong.cm.consu.api.dto.TestInfoDto">
+		select id, file_type, test_time, file_title, content, create_time, update_time as publishDate,
+		update_by, test_product_ids, test_merchant_ids, relation_file_ids, agency_name, remarks
+		from cm_test_info
+		where deleted = '0'
+		<if test="vo.fileTitle != null and vo.fileTitle != ''">
+			and file_title like concat('%', #{vo.fileTitle}, '%')
+		</if>
+		<if test="vo.startTime != null">
+			and create_time &gt;= #{vo.startTime}
+		</if>
+		<if test="vo.endTime != null">
+			and create_time &lt; #{vo.endTime}
+		</if>
+		order by update_time desc
+	</select>
+
+	<select id="getDtoById" resultType="com.jiaolong.cm.consu.api.dto.TestInfoDto"
+			parameterType="java.lang.Long">
+		select id, file_type, test_time, file_title, content, create_time, update_time as publishDate,
+			   update_by, test_product_ids, test_merchant_ids, relation_file_ids, agency_name, remarks
+		from cm_test_info
+		where id = #{id}
+	</select>
+
+	<update id="deleteTestInfoByIds">
+		update cm_test_info set deleted = '1' where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

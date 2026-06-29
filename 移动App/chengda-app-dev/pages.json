@@ -1,0 +1,426 @@
+{
+  "pages": [
+    {
+      "path": "pages/Conversation/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Login/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Chat/message/p2p-set",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-set/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-set/group-info-edit",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Contact/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Contact/contact-list/group-list",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Contact/contact-list/valid-list",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Contact/contact-list/black-list",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Chat/index",
+      "style": {
+        "navigationBarBackgroundColor": "#F6F8FA",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": false,
+        "app-plus": {
+          "softinputNavBar": "none",
+          "bounce": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/Chat/video-play",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-member/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-create/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-add/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Friend/add-friend/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user-card/friend/index",
+      "style": {
+        "navigationBarTitleText" : "好友名片",
+        "navigationBarBackgroundColor": "#FFFFFF"
+      }
+    },
+    {
+      "path": "pages/user-card/my/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user-card/my/setting",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user-card/my-detail/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/user-card/detail-item/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-set/nick-in-team",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-set/group-manage",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-set/transform-team",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-set/group-manager-list",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Group/group-set/add-group-manager",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/Chat/forward",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+	// 收货地址
+	{
+	  "path": "pages/user-card/more-settings/deliveryAddress/index",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 修改地址
+	{
+	  "path": "pages/user-card/more-settings/deliveryAddress/modifyNew/editCardAddress",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 新增地址
+	{
+	  "path": "pages/user-card/more-settings/deliveryAddress/modifyNew/newCardAddress",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 个人认证
+	{
+	  "path": "pages/user-card/more-settings/personalCertification/index",
+	  "style": {
+	    "navigationBarTitleText" : "个人认证",
+		"navigationBarBackgroundColor": "#FFFFFF"
+	  }
+	},
+	// 账户与安全
+	{
+	  "path": "pages/user-card/more-settings/AccountsSecurity/index",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 登录密码
+	{
+	  "path": "pages/user-card/more-settings/AccountsSecurity/cryptographicDeviceLogout/cryptographic",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 查看设备
+	{
+	  "path": "pages/user-card/more-settings/AccountsSecurity/cryptographicDeviceLogout/device",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 注销账号
+	{
+	  "path": "pages/user-card/more-settings/AccountsSecurity/cryptographicDeviceLogout/logout",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 购物模块
+	{
+	  "path": "pages/goShopping/index",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 我的订单
+	{
+	  "path": "pages/goShopping/myOrder/index",
+	  "style": {
+	    "navigationBarTitleText" : "我的订单",
+	    "navigationBarBackgroundColor": "#FFFFFF"
+	  }
+	},
+  // 隐私政策
+    {
+      "path": "pages/protocolPages/PrivacyPolicy/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 服务协议
+    {
+      "path": "pages/protocolPages/UserAgreement/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+	// 商品订单详情页面>>>组件封装
+	{
+	  "path": "pages/goShopping/productDetailsPage/productDetailsPage",
+	  "style": {
+		"navigationBarTitleText" : "商品详情",
+		"transparentTitle": "auto",
+		"navigationBarBackgroundColor": "#FFFFFF"
+	  }
+	},
+	// 订单支付页面
+	{
+	  "path": "pages/goShopping/orderPayment/index",
+	  "style": {
+	    "navigationBarTitleText" : "订单支付",
+		"navigationBarBackgroundColor": "#FFFFFF"
+	  }
+	},
+	// 商品状态详情页
+	{
+	  "path": "pages/goShopping/itemStatusDetailsPage/index",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 积分转换页面
+	{
+	  "path": "pages/user-card/more-settings/integralConversion/index",
+	  "style": {
+	    "navigationStyle": "custom"
+	  }
+	},
+	// 查看物流状态
+	{
+	  "path": "pages/goShopping/ciewLogistics/viewsLogistics",
+	  "style": {
+	    "navigationBarTitleText" : "查看物流",
+	    "navigationBarBackgroundColor": "#FFFFFF"
+	  }
+	},
+	{
+		"path" : "pages/goShopping/servicePerson/index",
+		"style" : 
+		{
+			"navigationBarTitleText" : "为您服务的人",
+			"navigationBarBackgroundColor": "#FFFFFF"
+		}
+	},
+	{
+		"path" : "pages/goShopping/servicePerson/userInfo",
+		"style" : 
+		{
+			"navigationBarTitleText" : "个人简介",
+			"navigationBarBackgroundColor": "#FFFFFF"
+		}
+	},
+	{
+		"path" : "pages/goShopping/servicePerson/userAdd",
+		"style" : 
+		{
+			"navigationBarTitleText" : "申请添加好友",
+			"navigationBarBackgroundColor": "#FFFFFF"
+		}
+	},
+	{
+		"path" : "pages/goShopping/orderPayment/orderAddress",
+		"style" : 
+		{
+			"navigationBarTitleText" : "收货地址",
+			"navigationBarBackgroundColor": "#FFFFFF"
+		}
+	},
+	{
+		"path" : "pages/user-card/my/userCode",
+		"style" : 
+		{
+			"navigationStyle": "custom"
+		}
+	},
+	{
+		"path" : "pages/Conversation/pointsPop",
+		"style" : 
+		{
+			"navigationStyle": "custom",
+			"app-plus": {
+				"animationType": "fade-in",//动画效果
+				"background": "transparent",//背景透明
+				"backgroundColor": "rgba(0,0,0,0)",//背景透明
+				"popGesture": "none", //禁止苹果侧滑返回
+				"disableSwipeBack": true // 禁止IOS侧滑事件
+			}
+		}
+	},
+	{
+		"path" : "pages/guide/guide",
+		"style" : 
+		{
+			"navigationBarTitleText" : "完善信息",
+			"navigationBarBackgroundColor": "#FFFFFF",
+			"app-plus": {
+				"titleNView":{
+					"buttons":[{
+						"text": "保存",
+						"color":"#409EFF",
+						"fontSize": "16"
+					}]
+				}
+			}
+		}
+	},
+	{
+		"path" : "pages/goShopping/productDetailsPage/quality",
+		"style" : 
+		{
+			"navigationBarTitleText" : "质检详情",
+			"navigationBarBackgroundColor": "#FFFFFF"
+		}
+	},
+	{
+		"path" : "pages/goShopping/file",
+		"style" : 
+		{
+			"navigationBarTitleText" : "文件浏览"
+		}
+	},
+	{
+		"path": "pages/protocolPages/PrivacyConfirmDialog",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	},
+	{
+		"path": "components/PrivacyConfirm",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	},
+	{
+		"path": "pages/complaint/index",
+		"style": {
+			"navigationBarTitleText": ""
+		}
+	}
+	
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+	"navigationBarBackgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "color": "#999999",
+    "selectedColor": "#337EFF",
+    "height": "60px",
+    "list": [
+      {
+        "text": "%messageText%",
+        "iconPath": "static/conversation.png",
+        "selectedIconPath": "static/conversation-selected.png",
+        "pagePath": "pages/Conversation/index"
+      },
+      {
+        "text": "%cantactsText%",
+        "iconPath": "static/contact.png",
+        "selectedIconPath": "static/contact-selected.png",
+        "pagePath": "pages/Contact/index"
+      },
+      {
+        "text": "%mineText%",
+        "pagePath": "pages/user-card/my/index",
+        "iconPath": "static/me.png",
+        "selectedIconPath": "static/me-selected.png"
+      }
+    ]
+  }
+}

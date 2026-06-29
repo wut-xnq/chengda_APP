@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmOrderPaymentMapper">
+	<select id="getPageList" resultType="com.jiaolong.cm.merch.api.dto.PaymentOrderDto">
+		select cop.id, cop.payment_no, cop.shopping_order_no, cop.buyer_id, cop.merchant_id, cop.user_charge_account, cop.merchant_charge_account, cop.create_time,
+		       cop.amount, cop.trade_state as paymentState, cop.payment_type, cop.trade_flow_no, cc.username as username, cmi.merchant_name
+		from cm_order_payment cop
+		left join cm_order_shopping cos on cop.shopping_order_no = cos.order_no
+		left join cm_customer cc on cop.buyer_id = cc.user_id
+		left join cm_merchant_info cmi on cos.merchant_id = cmi.id
+		where cop.deleted = '0'
+		<if test="vo.merchantId != null">
+			and cos.merchant_id = #{vo.merchantId}
+		</if>
+		<if test="vo.paymentNo != null and vo.paymentNo != ''">
+			and cop.payment_no = #{vo.paymentNo}
+		</if>
+		<if test="vo.paymentType != null">
+			and cop.payment_type = #{vo.paymentType}
+		</if>
+		<if test="vo.tradeState != null">
+			and cop.trade_state = #{vo.tradeState}
+		</if>
+		<if test="vo.createTimeStart != null">
+			and cop.create_time &gt;= #{vo.createTimeStart}
+		</if>
+		<if test="vo.createTimeEnd != null">
+			and cop.create_time &lt; #{vo.createTimeEnd}
+		</if>
+		<if test="vo.amountMin != null and vo.amountMin != ''">
+			and cop.amount &gt;= cast(#{vo.amountMin} as DECIMAL)
+		</if>
+		<if test="vo.amountMax != null and vo.amountMax != ''">
+			and cop.amount &lt; cast(#{vo.amountMax} as DECIMAL)
+		</if>
+		order by cop.create_time desc
+	</select>
+
+	<select id="getDetailById" resultType="com.jiaolong.cm.merch.api.dto.PaymentOrderDto">
+		select cop.id, cop.payment_no, cop.shopping_order_no, cop.buyer_id, cop.merchant_id, cop.user_charge_account, cop.merchant_charge_account, cop.create_time,
+			   cop.amount, cop.trade_state as paymentState, cos.payment_type, cop.trade_flow_no, cc.username as username, cmi.merchant_name
+		from cm_order_payment cop
+		left join cm_order_shopping cos on cop.shopping_order_no = cos.order_no
+		left join cm_customer cc on cop.buyer_id = cc.user_id
+		left join cm_merchant_info cmi on cos.merchant_id = cmi.id
+		where cop.id = #{id}
+	</select>
+
+	<select id="getOrderPaymentRecord" resultType="com.jiaolong.cm.merch.api.entity.CmOrderPayment">
+		select id, payment_no, shopping_order_no, buyer_id, merchant_id, user_charge_account, merchant_charge_account, create_time, amount, trade_state, trade_flow_no, deleted
+		from cm_order_payment where shopping_order_no = #{shoppingOrderNo} order by trade_state desc, create_time desc limit 1
+	</select>
+
+	<update id="deletePaymentOrderById">
+		update cm_order_payment set deleted = '1' where id in
+		<foreach collection="ids" index="i" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+
+	<select id="statisticOrderVolume" resultType="com.jiaolong.cm.merch.api.dto.StatisticOrderQueryDto">
+		select sum(amount) as income, count(*) as orderCount
+		from cm_order_payment
+		where trade_state = 3 and merchant_id = #{merchantId} and create_time &gt; #{start}
+	</select>
+</mapper>

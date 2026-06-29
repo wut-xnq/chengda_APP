@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.admin.mapper.CmProductMapper">
+
+    <select id="selectVerifiedProductList" resultType="com.jiaolong.cm.consu.api.dto.ProductVerifiedDto">
+		select id, product_name, product_pics from cm_product where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+
+    <select id="getMerchantIdByProductIds" resultType="java.lang.Long">
+		select merchant_id from cm_product where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+
+    <select id="getExamGoodList" resultType="com.jiaolong.cm.admin.api.dto.ExamGoodsDto">
+		select cp.id as procuctId, cp.product_name as productName, cmi.merchant_name as merchantName
+		from cm_product cp left join cm_merchant_info cmi on cp.merchant_id = cmi.id
+		where cp.shelve_state = '1' and shelve_area = '1'
+	</select>
+
+	<update id="shelveProduct" parameterType="com.jiaolong.cm.merch.api.vo.ProductShelveVo">
+		update cm_product
+		<set>
+			<if test="vo.shelveState != null and vo.shelveState != ''">
+				shelve_state = #{vo.shelveState},
+			</if>
+			<if test="vo.shelveArea != null">
+				shelve_area = #{vo.shelveArea}
+			</if>
+		</set>
+		where id = #{vo.id}
+	</update>
+
+    <update id="unShelveMerchantProduct">
+		update cm_product set shelve_state = '0' where shelve_state = '1' and merchant_id = #{merchantId}
+	</update>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmCustomerMapper">
+
+	<select id="getTranUserList" resultType="com.jiaolong.cm.consu.api.dto.UserScoreDto">
+		select u.user_id, u.avatar, u.nickname, u.phone, u.user_score, u.if_gift_score
+		from cm_customer u
+		where u.del_flag = '0' and u.role_id = 2 and u.user_score > 0 and u.inviter_id = #{inviterId}
+	</select>
+
+	<update id="updateGiftScore">
+		update cm_customer set if_gift_score = '1' where user_id in
+		<foreach collection="ids" index="i" open="(" close=")" item="id" separator=",">
+			#{id}
+		</foreach>
+	</update>
+
+	<select id="getStaffDetails" resultType="com.jiaolong.cm.consu.api.dto.StaffDto">
+		select cc.user_id, cc.create_time, cc.phone, cc.avatar, cc.nickname, cc.name, cc.birthday, cc.hobby, cc.major,
+		       cc.brief, cc.invitation_code, cc.verified, cc.merchant_id, cm.merchant_name,
+		       concat(c1.city_name,c2.city_name,c3.city_name,cm.address) as fullAddress
+		from cm_customer cc
+		left join cm_merchant_info cm on cc.merchant_id = cm.id
+		left join city_code c1 on cm.province_code = c1.city_id
+		left join city_code c2 on cm.city_code = c2.city_id
+		left join city_code c3 on cm.country_code = c3.city_id
+		where cc.user_id = #{userId}
+	</select>
+
+    <select id="getDetailsById" resultType="com.jiaolong.cm.consu.api.dto.UserPersonalDto">
+		select cc.user_id, cc.create_time, cc.phone, cc.avatar, cc.username, cc.nickname, cc.name, cc.gender, cc.age,
+			   cc.birthday, cc.hobby, cc.major, cc.brief, cc.role_id, cc.merchant_id, cc.user_score, cc.if_gift_score,
+			   cc.invitation_code, cc.inviter_id, cc.verified, cmi.merchant_name
+		from cm_customer cc
+		left join cm_merchant_info cmi on cc.merchant_id = cmi.id
+		where cc.user_id = #{userId}
+	</select>
+
+	<select id="getByPhone" resultType="com.jiaolong.cm.consu.api.dto.UserPersonalDto">
+		select cc.user_id, cc.create_time, cc.phone, cc.avatar, cc.username, cc.nickname, cc.name, cc.gender, cc.age,
+			   cc.birthday, cc.hobby, cc.major, cc.brief, cc.role_id, cc.merchant_id, cc.user_score, cc.if_gift_score,
+			   cc.invitation_code, cc.inviter_id, cc.verified, cmi.merchant_name
+		from cm_customer cc
+		left join cm_merchant_info cmi on cc.merchant_id = cmi.id
+		where cc.phone = #{phone}
+	</select>
+
+	<update id="updateUserScore">
+		update cm_customer set user_score = #{userScore} where user_id = #{userId}
+	</update>
+</mapper>

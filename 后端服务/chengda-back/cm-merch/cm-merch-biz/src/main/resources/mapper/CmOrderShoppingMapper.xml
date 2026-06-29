@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmOrderShoppingMapper">
+
+	<select id="getPageList" resultType="com.jiaolong.cm.merch.api.dto.ShoppingOrderDto">
+		select cos.id, cos.create_time, cos.order_no, cos.user_id, cos.merchant_id, cos.real_price, cos.settlement_amount, cos.state, cos.payment_type,
+				cos.payment_state, cos.remarks, col.logistics_no, su.username as username, cmi.merchant_name,
+		CONCAT((select city_name from city_code where city_id = uas.province_code),
+		(select city_name from city_code where city_id = uas.city_code),
+		(select city_name from city_code where city_id = uas.country_code), uas.address, uas.concat_person) as address_detail
+		from cm_order_shopping cos
+		left join cm_customer su on cos.user_id = su.user_id
+		left join cm_order_logistics col on cos.order_no = col.shopping_order_no
+		left join cm_merchant_info cmi on cos.merchant_id = cmi.id
+		left join cm_user_address uas on uas.id = cos.user_address_id
+		where cos.deleted = '0'
+		<if test="vo.merchantId != null">
+			and cos.merchant_id = #{vo.merchantId}
+		</if>
+		<if test="vo.orderNo != null and vo.orderNo != ''">
+			and cos.order_no = #{vo.orderNo}
+		</if>
+		<if test="vo.username != null and vo.username != ''">
+			and su.username = #{vo.username}
+		</if>
+		<if test="vo.state != null">
+			and cos.state = #{vo.state}
+		</if>
+		<if test="vo.createTimeStart != null">
+			and cos.create_time &gt;= #{vo.createTimeStart}
+		</if>
+		<if test="vo.createTimeEnd != null">
+			and cos.create_time &lt; #{vo.createTimeEnd}
+		</if>
+		order by cos.create_time desc
+	</select>
+
+	<select id="getDetailById" resultType="com.jiaolong.cm.merch.api.dto.ShoppingOrderDto"
+			parameterType="java.lang.Long">
+		select cos.id, cos.create_time, cos.order_no, cos.user_id, cos.merchant_id, cos.real_price, cos.settlement_amount, cos.state, cos.payment_type,
+			cos.payment_state, cos.remarks, col.logistics_no, su.username as username, cmi.merchant_name
+		from cm_order_shopping cos
+		left join cm_customer su on cos.user_id = su.user_id
+		left join cm_order_logistics col on cos.order_no = col.shopping_order_no
+		left join cm_merchant_info cmi on cos.merchant_id = cmi.id
+		where cos.id = #{id}
+	</select>
+
+	<select id="getProductListById" resultType="com.jiaolong.cm.merch.api.entity.CmOrderProducts"
+			parameterType="java.lang.Long">
+		select id, create_time, order_id, sku_id, amount, product_name, deleted
+		from cm_order_products where order_id = #{id}
+	</select>
+
+	<update id="deleteOrderById">
+		update cm_order_shopping set deleted = '1' where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.admin.mapper.CmCustomerMapper">
+	<select id="countInvitationCode" resultType="java.lang.Integer">
+		select count(*) from cm_customer where invitation_code = #{code}
+	</select>
+
+	<select id="getInviterIdByCode" resultType="com.jiaolong.cm.admin.api.dto.CustomerScoreDto">
+		select user_id, user_score from cm_customer where invitation_code = #{inviteCode}
+	</select>
+
+	<select id="getPageList" resultType="com.jiaolong.cm.admin.api.dto.CustomerDto">
+		select cc.user_id, cc.create_time, cc.phone, cc.name, cc.gender, cc.age, cc.merchant_id,
+		       cc.lock_flag, cc.verified, cmi.merchant_name as merchantName
+		from cm_customer cc
+		left join cm_merchant_info cmi on cc.merchant_id = cmi.id
+		where cc.del_flag = '0'
+		<if test="vo.phone != null and vo.phone != ''">
+			and cc.phone = #{vo.phone}
+		</if>
+		<if test="vo.name != null and vo.name != ''">
+			and cc.name = #{vo.name}
+		</if>
+		<if test="vo.lockFlag != null and vo.lockFlag != ''">
+			and cc.lock_flag = #{vo.lockFlag}
+		</if>
+		<if test="vo.merchantId != null">
+			and cc.merchant_id = #{vo.merchantId}
+		</if>
+	</select>
+
+	<select id="getDetailsById" resultType="com.jiaolong.cm.admin.api.dto.CustomerDto">
+		select cc.user_id, cc.create_time, cc.phone, cc.name, cc.gender, cc.age, cc.merchant_id,
+			   cc.lock_flag, cc.verified, cmi.merchant_name as merchantName
+		from cm_customer cc
+		left join cm_merchant_info cmi on cc.merchant_id = cmi.id
+		where cc.user_id = #{userId}
+	</select>
+
+	<update id="disabled">
+		update cm_customer set lock_flag = #{lockFlag} where user_id = #{userId}
+	</update>
+
+	<select id="getCustomerByPhone" resultType="com.jiaolong.cm.merch.api.entity.CmCustomer">
+		select user_id, im_access_token, create_time, phone, password, nickname, avatar, name, gender, age,
+		       email, birthday, hobby, major, brief, role_id, merchant_id, dept_id, user_number, lock_flag,
+		       user_score, if_gift_score, invitation_code, inviter_id, verified, update_time, del_flag
+		from cm_customer where phone = #{phone}
+	</select>
+
+	<select id="getCustomerInfoVo" resultType="com.jiaolong.cm.admin.api.vo.CustomerVO">
+		select cm.user_id, cm.username, cm.create_time, cm.update_time, cm.lock_flag, cm.del_flag, cm.phone, cm.avatar, cm.dept_id, cd.name as deptName,
+			   cm.nickname, cm.name, cm.gender, cm.email, cm.birthday, cm.hobby, cm.major, cm.role_id, cm.merchant_id, cmi.merchant_name as merchantName
+		from cm_customer cm
+		left join cm_merchant_info cmi on cm.merchant_id = cmi.id
+		left join sys_dept cd on cm.dept_id = cd.dept_id
+		where cm.user_id = #{userId}
+	</select>
+
+	<update id="updateUserScore">
+		update cm_customer set user_score = #{userScore} where user_id = #{userId}
+	</update>
+</mapper>

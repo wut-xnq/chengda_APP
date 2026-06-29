@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmUserVerifiedMapper">
+
+	<select id="getVerifiedResultByUserId" resultType="com.jiaolong.cm.consu.api.dto.UserVerifiedDto"
+			parameterType="java.lang.Long">
+		select cuv.id, cuv.create_time, cuv.user_id, cuv.merchant_id, cuv.operator_id, cuv.verified_state, cuv.update_time,
+		       cuv.remarks, cmi.merchant_name, cuv.name_last_char, cuv.deleted
+		from cm_user_verified cuv left join cm_merchant_info cmi on cuv.merchant_id = cmi.id
+		where cuv.deleted = '0' and cuv.user_id = #{userId}
+	</select>
+
+	<update id="initUserVerified">
+		update cm_user_verified set deleted = '0', verified_state = '0', remarks = '待认证', merchant_id = #{merchantId}, name_last_char = #{nameLastChar} where user_id = #{userId}
+	</update>
+</mapper>

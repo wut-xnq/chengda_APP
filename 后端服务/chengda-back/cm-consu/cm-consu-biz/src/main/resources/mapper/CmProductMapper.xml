@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmProductMapper">
+
+	<select id="selectListPage" resultType="com.jiaolong.cm.consu.api.dto.ProductDto">
+		select p.id, p.product_name, p.product_pics, p.shelve_area, p.product_skus, p.product_specs,
+		       p.min_price as currentPrice, pst.view_amount, pst.order_amount, p.product_text
+		from cm_product p
+		left join cm_product_statistics_trend pst on pst.product_id = p.id
+		where deleted = '0' and shelve_state = '1'
+		<if test="param.productName != null and param.productName != ''">
+			and p.product_name like concat('%', #{param.productName}, '%')
+		</if>
+		<if test="param.shelveArea != null">
+			and p.shelve_area = #{param.shelveArea}
+		</if>
+		order by p.create_time desc
+	</select>
+
+	<select id="getDetailsById" resultType="com.jiaolong.cm.consu.api.dto.ProductDto">
+		select p.id, p.product_name, p.product_code, p.product_brief, p.product_text, p.product_pics, p.merchant_id, p.if_shipped, p.deliver,
+			   p.shelve_state, p.shelve_area, p.logistic_id, p.index_topped, p.brand_name, p.product_classify, p.product_skus, p.product_specs,
+			   p.labels, p.product_guarantees, pst.view_amount, pst.order_amount, cmi.charge_person_phone as customerServicePhone
+		from cm_product p
+		left join cm_product_statistics_trend pst on pst.product_id = p.id
+		left join cm_merchant_info cmi on p.merchant_id = cmi.id
+		where p.deleted = '0' and p.shelve_state = '1' and p.id = #{id}
+	</select>
+
+	<select id="selectVerifiedProductList" resultType="com.jiaolong.cm.consu.api.dto.ProductVerifiedDto">
+		select id, product_name, product_pics from cm_product where id in
+		<foreach collection="ids" item="id" separator="," index="i" open="(" close=")">
+			#{id}
+		</foreach>
+	</select>
+
+    <select id="getRelationProductDtoList" resultType="com.jiaolong.cm.consu.api.dto.RelationProductDto">
+		select p.id, p.product_name, p.product_pics, p.merchant_id, pst.view_amount, pst.order_amount
+		from cm_product p
+		left join cm_product_statistics_trend pst on pst.product_id = p.id
+		where deleted = '0' and shelve_state = '1'
+		order by pst.view_amount desc, p.create_time desc
+		limit 10
+	</select>
+
+</mapper>

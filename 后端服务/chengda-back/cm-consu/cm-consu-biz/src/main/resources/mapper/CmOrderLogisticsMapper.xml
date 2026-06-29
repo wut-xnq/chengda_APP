@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmOrderLogisticsMapper">
+
+	<select id="getByOrderNo" resultType="com.jiaolong.cm.consu.api.entity.CmOrderLogistics"
+			parameterType="java.lang.String">
+		select id, create_time, logistics_name, logistics_no, shopping_order_no, deleted
+		from cm_order_logistics
+		where shopping_order_no = #{orderNo}
+	</select>
+</mapper>

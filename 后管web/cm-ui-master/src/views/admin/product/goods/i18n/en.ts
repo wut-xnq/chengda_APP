@@ -1,0 +1,23 @@
+export default {
+	goods: {
+		index: '#',
+		id: 'id',
+		goodsName: 'goods name',
+		productClassify: 'productClassify',
+		shelveState: 'shelveState',
+		shelveArea: 'shelveArea',
+		merchantName: 'merchantName',
+		price: 'price',
+		verified: 'verified',
+		lockFlag: 'lockFlag',
+		createBy: 'createBy',
+		updateBy: 'updateBy',
+		createTime: 'createTime',
+		updateTime: 'updateTime',
+		tenantId: 'tenantId',
+		brandName: '商品品牌',
+		productPics: '商品主图',
+		productLabelList: '商品标签',
+		inputResourceIdsTip: '请输入',
+	},
+};

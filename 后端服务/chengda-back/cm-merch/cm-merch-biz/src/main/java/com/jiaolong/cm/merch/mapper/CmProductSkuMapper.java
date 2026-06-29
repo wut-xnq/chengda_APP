@@ -1,0 +1,30 @@
+package com.jiaolong.cm.merch.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jiaolong.cm.merch.api.dto.ProductSkuDto;
+import com.jiaolong.cm.merch.api.entity.CmProductSku;
+import com.jiaolong.cm.merch.api.vo.ProductSkuSearchVo;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * desc: 商品SKU数据交互
+ * user: pan
+ * date: 2024-09-01 16:00
+ */
+@Mapper
+public interface CmProductSkuMapper extends BaseMapper<CmProductSku> {
+	IPage<ProductSkuDto> getDtoPage(Page page, @Param("vo") ProductSkuSearchVo vo);
+
+	int deleteSkuById(@Param("ids") Long[] ids);
+
+	List<ProductSkuDto> getSkuListByProductId(@Param("productId") Long productId);
+
+    int countSkuByProductId(@Param("productId") Long productId);
+
+	int updateIfDefaultByProductId(@Param("productId") Long productId);
+}

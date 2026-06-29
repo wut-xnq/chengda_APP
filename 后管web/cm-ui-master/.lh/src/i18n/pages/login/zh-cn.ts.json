@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/i18n/pages/login/zh-cn.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1726891903625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726892858935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n // 定义内容\n export default {\n \tlabel: {\n-\t\tone1: '用户名登录',\n+\t\tone1: '平台用户登录',\n \t\ttwo2: '手机号登录',\n \t\tthree3: '社交登录',\n-\t\tfour4: '商户端登录',\n+\t\tfour4: '商户端用户登录',\n \t\tregister: '注册账号',\n \t},\n \tlink: {\n \t\tone3: '第三方登录',\n"
+                }
+            ],
+            "date": 1726891903625,
+            "name": "Commit-0",
+            "content": "// 定义内容\nexport default {\n\tlabel: {\n\t\tone1: '用户名登录',\n\t\ttwo2: '手机号登录',\n\t\tthree3: '社交登录',\n\t\tfour4: '商户端登录',\n\t\tregister: '注册账号',\n\t},\n\tlink: {\n\t\tone3: '第三方登录',\n\t\ttwo4: '友情链接',\n\t},\n\tpassword: {\n\t\taccountPlaceholder1: '请输入用户名',\n\t\taccountPlaceholder2: '请输入密码',\n\t\taccountPlaceholder3: '请输入验证码',\n\t\tphonePlaceholder4: '请输入手机号',\n\t\taccountBtnText: '登 录',\n\t\tregisterBtnText: '注 册',\n\t\treadAccept: '我已仔细阅读并接受',\n\t\tprivacyPolicy: '《隐私政策》',\n\t},\n\tmobile: {\n\t\tplaceholder1: '请输入手机号',\n\t\tplaceholder2: '请输入验证码',\n\t\tcodeText: '获取验证码',\n\t\tbtnText: '登 录',\n\t},\n\tscan: {\n\t\ttext: '打开手机扫一扫，快速登录/注册',\n\t\twechatApp: '微信扫码体验移动端',\n\t},\n\ttenant_guide: {\n\t\ttitle: '请选择租户，点击此处',\n\t\tdescription: '请选择租户，只需要在第一次使用时进行选择。',\n\t},\n\tsignInText: '欢迎回来！',\n\tbrowserMsgText: '* 温馨提示：建议使用谷歌、Microsoft Edge，版本 79.0.1072.62 及以上浏览器，360浏览器请使用极速模式',\n};\n"
+        }
+    ]
+}

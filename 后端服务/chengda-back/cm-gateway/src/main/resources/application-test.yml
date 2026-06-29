@@ -1,0 +1,23 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      username: @nacos.username@
+      password: @nacos.password@
+      discovery:
+        server-addr: 47.109.36.98:8848
+        namespace: test
+        watch:
+          enabled: true
+        watch-delay: 1000
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: test
+  config:
+    import:
+      - optional:nacos:application.yml
+      - optional:nacos:${spring.application.name}.yml

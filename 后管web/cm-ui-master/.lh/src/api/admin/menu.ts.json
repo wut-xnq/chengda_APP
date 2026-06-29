@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/api/admin/menu.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726720299551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726720299551,
+            "name": "Commit-0",
+            "content": "import request from '/@/utils/request';\n\nexport const pageList = (params?: Object) => {\n\treturn request({\n\t\turl: '/admin/menu/tree',\n\t\tmethod: 'get',\n\t\tparams,\n\t});\n};\n\nexport const info = (id: String) => {\n\treturn request({\n\t\turl: `/admin/menu/${id}`,\n\t\tmethod: 'get',\n\t});\n};\n\nexport const save = (data: Object) => {\n\treturn request({\n\t\turl: '/admin/menu',\n\t\tmethod: 'post',\n\t\tdata: data,\n\t});\n};\n\nexport const putObj = (data: Object) => {\n\treturn request({\n\t\turl: '/admin/menu',\n\t\tmethod: 'put',\n\t\tdata: data,\n\t});\n};\n\nexport const addObj = (data: Object) => {\n\treturn request({\n\t\turl: '/admin/menu',\n\t\tmethod: 'post',\n\t\tdata: data,\n\t});\n};\n\nexport const delObj = (id: string) => {\n\treturn request({\n\t\turl: '/admin/menu/' + id,\n\t\tmethod: 'delete',\n\t});\n};\n\n/**\n * 后端控制路由，isRequestRoutes 为 true，则开启后端控制路由\n * @method getAdminMenu 获取后端动态路由菜单(admin)\n */\nexport function useMenuApi() {\n\treturn {\n\t\tgetAdminMenu: (params?: object) => {\n\t\t\treturn request({\n\t\t\t\turl: '/admin/menu',\n\t\t\t\tmethod: 'get',\n\t\t\t\tparams,\n\t\t\t});\n\t\t},\n\t};\n}\n"
+        }
+    ]
+}

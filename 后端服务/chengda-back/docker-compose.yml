@@ -1,0 +1,106 @@
+version: '3'
+services:
+  cm-mysql:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    container_name: cm-mysql
+    image: cm-mysql
+    ports:
+      - 33306:3306
+    networks:
+      - spring_cloud_default
+
+  cm-redis:
+    image: registry.cn-hangzhou.aliyuncs.com/dockerhub_mirror/redis
+    ports:
+      - 36379:6379
+    restart: always
+    container_name: cm-redis
+    hostname: cm-redis
+    networks:
+      - spring_cloud_default
+
+  cm-register:
+    build:
+      context: ./cm-register
+    restart: always
+    ports:
+      - 8848:8848
+      - 9848:9848
+    container_name: cm-register
+    hostname: cm-register
+    image: cm-register
+    networks:
+      - spring_cloud_default
+
+  cm-gateway:
+    build:
+      context: ./cm-gateway
+    restart: always
+    ports:
+      - 9999:9999
+    container_name: cm-gateway
+    hostname: cm-gateway
+    image: cm-gateway
+    networks:
+      - spring_cloud_default
+
+  cm-auth:
+    build:
+      context: ./cm-auth
+    restart: always
+    container_name: cm-auth
+    hostname: cm-auth
+    image: cm-auth
+    networks:
+      - spring_cloud_default
+
+  cm-upms:
+    build:
+      context: ./cm-upms/cm-upms-biz
+    restart: always
+    container_name: cm-upms
+    hostname: cm-upms
+    image: cm-upms
+    networks:
+      - spring_cloud_default
+
+  cm-monitor:
+    build:
+      context: ./cm-visual/cm-monitor
+    restart: always
+    ports:
+      - 5001:5001
+    container_name: cm-monitor
+    hostname: cm-monitor
+    image: cm-monitor
+    networks:
+      - spring_cloud_default
+
+  cm-codegen:
+    build:
+      context: ./cm-visual/cm-codegen
+    restart: always
+    container_name: cm-codegen
+    hostname: cm-codegen
+    image: cm-codegen
+    networks:
+      - spring_cloud_default
+
+  cm-quartz:
+    build:
+      context: ./cm-visual/cm-quartz
+    restart: always
+    image: cm-quartz
+    container_name: cm-quartz
+    networks:
+      - spring_cloud_default
+
+networks:
+  spring_cloud_default:
+    name:  spring_cloud_default
+    driver: bridge

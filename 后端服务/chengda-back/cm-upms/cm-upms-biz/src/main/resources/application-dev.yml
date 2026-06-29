@@ -1,0 +1,40 @@
+server:
+  port: 4444
+
+spring:
+  application:
+    name: upms
+  cloud:
+    nacos:
+      username: @nacos.username@
+      password: @nacos.password@
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: dev
+  config:
+    import:
+      - nacos:application.yml
+      - nacos:${spring.application.name}.yml
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+cm:
+  alipay:
+    rate: 0.6 # 支付宝开放平台提现税率（当前官方设定日活量较低时为0.6%）
+  wechatpay:
+    rate: 0.6 # 微信开放平台提现税率（当前官方设定日活量较低时为0.6%）
+
+file:
+  bucketName: cbdFile
+  local:
+    enable: true
+    base-path: /temp/chengda
+  oss:
+    enable: false
+    endpoint: http://192.168.31.99:9000
+    access-key: LTAI5tS6eHqYXQEYpVnhNLga
+    secret-key: vdbJUelounGoq31nAa3xZj9bNoEZYr

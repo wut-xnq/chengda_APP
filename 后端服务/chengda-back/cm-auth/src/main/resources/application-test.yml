@@ -1,0 +1,20 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: auth
+  cloud:
+    nacos:
+      username: @nacos.username@
+      password: @nacos.password@
+      discovery:
+        server-addr: 47.109.36.98:8848
+        namespace: test
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: test
+  config:
+    import:
+      - nacos:application.yml
+      - nacos:${spring.application.name}.yml

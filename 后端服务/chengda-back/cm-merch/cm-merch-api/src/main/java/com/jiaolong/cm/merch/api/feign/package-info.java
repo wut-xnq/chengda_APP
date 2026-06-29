@@ -1,0 +1,1 @@
+package com.jiaolong.cm.merch.api.feign;

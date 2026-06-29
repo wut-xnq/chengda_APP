@@ -1,0 +1,6 @@
+com.jiaolong.cm.admin.api.feign.RemoteClientDetailsService
+com.jiaolong.cm.admin.api.feign.RemoteDictService
+com.jiaolong.cm.admin.api.feign.RemoteLogService
+com.jiaolong.cm.admin.api.feign.RemoteParamService
+com.jiaolong.cm.admin.api.feign.RemoteTokenService
+com.jiaolong.cm.admin.api.feign.RemoteUserService

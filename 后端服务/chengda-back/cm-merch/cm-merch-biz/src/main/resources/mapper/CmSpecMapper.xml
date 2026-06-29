@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmSpecMapper">
+
+	<select id="getPage" resultType="com.jiaolong.cm.merch.api.dto.SpecDto">
+		select cs.id, cs.merchant_id, cs.group_id, cs.create_time, cs.spec_name, cs.state,
+		       csg.group_name as groupName, cmi.merchant_name as merchantName
+		from cm_specification cs
+		left join cm_specification_group csg on cs.group_id = csg.id
+		left join cm_merchant_info cmi on cs.merchant_id = cmi.id
+		where cs.deleted = '0' and cmi.deleted = '0'
+		<if test="vo.merchantId != null">
+			and cs.merchant_id = #{vo.merchantId}
+		</if>
+		<if test="vo.groupId != null">
+			and cs.group_id = #{vo.groupId}
+		</if>
+		<if test="vo.state != null and vo.state != ''">
+			and cs.state = #{vo.state}
+		</if>
+		<if test="vo.specName != null and vo.specName != ''">
+			and cs.spec_name like concat('%', #{vo.specName}, '%')
+		</if>
+		order by cs.create_time desc
+	</select>
+
+	<select id="getListByGroupId" resultType="com.jiaolong.cm.merch.api.dto.SpecDto">
+		select cs.id, cs.merchant_id, cs.group_id, cs.create_time, cs.spec_name, cs.state,
+			   csg.group_name as groupName, cmi.merchant_name as merchantName
+		from cm_specification cs
+		left join cm_specification_group csg on cs.group_id = csg.id
+		left join cm_merchant_info cmi on cs.merchant_id = cmi.id
+		where cmi.deleted = '0' and cs.group_id = #{groupId}
+		order by cs.create_time desc
+	</select>
+
+	<select id="getSpecIdListByMerchantId" resultType="java.lang.Long">
+		select id from cm_specification where merchant_id = #{merchantId} order by create_time desc
+	</select>
+
+	<select id="getSpecListByProductId" resultType="com.jiaolong.cm.merch.api.dto.SpecDto"
+			parameterType="java.lang.Long">
+		select cs.id, cs.merchant_id, cs.group_id, cs.create_time, cs.spec_name, cs.state,
+			   csg.group_name as groupName, cmi.merchant_name as merchantName
+		from cm_product_spec cps
+		left join cm_specification cs on cps.spec_id = cs.id
+		left join cm_specification_group csg on cs.group_id = csg.id
+		left join cm_merchant_info cmi on cs.merchant_id = cmi.id
+		where cs.deleted = '0' and cs.state = '1' and cmi.deleted = '0' and cps.product_id = #{productId}
+		order by cs.create_time desc
+	</select>
+
+    <select id="getSpecListByMerchantId" resultType="com.jiaolong.cm.merch.api.dto.SpecDto">
+		select cs.id, cs.merchant_id, cs.group_id, cs.create_time, cs.spec_name, cs.state,
+			   csg.group_name as groupName, cmi.merchant_name as merchantName
+		from cm_specification cs
+		left join cm_specification_group csg on cs.group_id = csg.id
+		left join cm_merchant_info cmi on cs.merchant_id = cmi.id
+		where cs.deleted = '0' and cmi.deleted = '0' and cs.merchant_id = #{merchantId}
+	</select>
+
+	<select id="countInUseSpec" resultType="java.lang.Integer">
+		select count(*)
+		from cm_product_spec cps
+		left join cm_product cp on cps.product_id = cp.id
+		where cp.deleted = '0' and cp.shelve_state = '1' and cps.spec_id in
+		<foreach collection="ids" index="i" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+
+	<update id="deleteSpecById">
+		update cm_specification set deleted = '1' where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

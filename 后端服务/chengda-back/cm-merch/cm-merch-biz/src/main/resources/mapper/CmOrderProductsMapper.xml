@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmOrderProductsMapper">
+
+	<select id="selectOrderProductList" resultType="com.jiaolong.cm.merch.api.dto.OrderProductDto">
+		select cps.product_id, cp.product_name, cp.product_code, cps.sku_name, cps.sku_code, cop.spec_name
+		from cm_order_products cop
+		left join cm_product_sku cps on cop.sku_id = cps.id
+		left join cm_product cp on cps.product_id = cp.id
+		where cop.order_id = #{orderId}
+	</select>
+</mapper>

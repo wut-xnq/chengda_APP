@@ -1,0 +1,50 @@
+{
+    "sourceFile": "src/views/home/favorite.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1726891238469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726891251476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \t\t\t</div>\n \t\t</template>\n \t\t<el-row :gutter=\"10\" v-if=\"favoriteRoutes.length > 0\">\n \t\t\t<el-col class=\"shortcutCard\" :span=\"6\" :key=\"shortcut.id\" v-for=\"shortcut in favoriteRoutes\">\n-\t\t\t\t<!-- <SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" /> -->\n+\t\t\t\t<SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" />\n \t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n"
+                },
+                {
+                    "date": 1726891265538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \t\t</template>\n \t\t<el-row :gutter=\"10\" v-if=\"favoriteRoutes.length > 0\">\n \t\t\t<el-col class=\"shortcutCard\" :span=\"6\" :key=\"shortcut.id\" v-for=\"shortcut in favoriteRoutes\">\n \t\t\t\t<SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" />\n-\t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n+\t\t\t\t<!-- <shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" /> -->\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n \t</el-card>\n"
+                },
+                {
+                    "date": 1726891278295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \t\t</template>\n \t\t<el-row :gutter=\"10\" v-if=\"favoriteRoutes.length > 0\">\n \t\t\t<el-col class=\"shortcutCard\" :span=\"6\" :key=\"shortcut.id\" v-for=\"shortcut in favoriteRoutes\">\n \t\t\t\t<SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" />\n-\t\t\t\t<!-- <shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" /> -->\n+\t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n \t</el-card>\n"
+                },
+                {
+                    "date": 1726891302162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \t\t</template>\n \t\t<el-row :gutter=\"10\" v-if=\"favoriteRoutes.length > 0\">\n \t\t\t<el-col class=\"shortcutCard\" :span=\"6\" :key=\"shortcut.id\" v-for=\"shortcut in favoriteRoutes\">\n \t\t\t\t<SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" />\n-\t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n+\t\t\t\t<!-- <shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" /> -->\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n \t</el-card>\n"
+                },
+                {
+                    "date": 1726891375061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n \t\t\t</div>\n \t\t</template>\n \t\t<el-row :gutter=\"10\" v-if=\"favoriteRoutes.length > 0\">\n \t\t\t<el-col class=\"shortcutCard\" :span=\"6\" :key=\"shortcut.id\" v-for=\"shortcut in favoriteRoutes\">\n-\t\t\t\t<SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" />\n-\t\t\t\t<!-- <shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" /> -->\n+\t\t\t\t<!-- <SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" /> -->\n+\t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n \t</el-card>\n"
+                },
+                {
+                    "date": 1726891462872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \t\t\t</div>\n \t\t</template>\n \t\t<el-row :gutter=\"10\" v-if=\"favoriteRoutes.length > 0\">\n \t\t\t<el-col class=\"shortcutCard\" :span=\"6\" :key=\"shortcut.id\" v-for=\"shortcut in favoriteRoutes\">\n-\t\t\t\t<!-- <SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" /> -->\n+\t\t\t\t<SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" />\n \t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n"
+                },
+                {
+                    "date": 1726891489290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <template>\n-\t<el-card class=\"box-card\" style=\"height: 100%\">\n+\t<!-- <el-card class=\"box-card\" style=\"height: 100%\">\n \t\t<template #header>\n \t\t\t<div class=\"card-header\">\n \t\t\t\t<span>{{ $t('home.quickNavigationToolsTip') }}</span>\n \t\t\t</div>\n@@ -11,9 +11,9 @@\n \t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n-\t</el-card>\n+\t</el-card> -->\n </template>\n \n <script setup lang=\"ts\" name=\"SysFavoriteDashboard\">\n import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';\n"
+                },
+                {
+                    "date": 1726891502589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <template>\n-\t<!-- <el-card class=\"box-card\" style=\"height: 100%\">\n+\t<el-card class=\"box-card\" style=\"height: 100%\">\n \t\t<template #header>\n \t\t\t<div class=\"card-header\">\n \t\t\t\t<span>{{ $t('home.quickNavigationToolsTip') }}</span>\n \t\t\t</div>\n@@ -11,9 +11,9 @@\n \t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n \t\t\t</el-col>\n \t\t</el-row>\n \t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n-\t</el-card> -->\n+\t</el-card>\n </template>\n \n <script setup lang=\"ts\" name=\"SysFavoriteDashboard\">\n import { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';\n"
+                }
+            ],
+            "date": 1726891238469,
+            "name": "Commit-0",
+            "content": "<template>\n\t<el-card class=\"box-card\" style=\"height: 100%\">\n\t\t<template #header>\n\t\t\t<div class=\"card-header\">\n\t\t\t\t<span>{{ $t('home.quickNavigationToolsTip') }}</span>\n\t\t\t</div>\n\t\t</template>\n\t\t<el-row :gutter=\"10\" v-if=\"favoriteRoutes.length > 0\">\n\t\t\t<el-col class=\"shortcutCard\" :span=\"6\" :key=\"shortcut.id\" v-for=\"shortcut in favoriteRoutes\">\n\t\t\t\t<!-- <SvgIcon name=\"ele-Close\" :size=\"12\" class=\"shortcutCardClose\" @click=\"handleCloseFavorite(shortcut)\" /> -->\n\t\t\t\t<shortcutCard :icon=\"shortcut.meta?.icon\" :label=\"shortcut.name\" @click=\"handleRoute(shortcut.path)\" />\n\t\t\t</el-col>\n\t\t</el-row>\n\t\t<el-empty :description=\"$t('home.addFavoriteRoutesTip')\" v-else />\n\t</el-card>\n</template>\n\n<script setup lang=\"ts\" name=\"SysFavoriteDashboard\">\nimport { useTagsViewRoutes } from '/@/stores/tagsViewRoutes';\nimport shortcutCard from '/@/components/ShortcutCard/index.vue';\n\n/**\n * 获取路由对象的实例。\n */\nconst router = useRouter();\n\n/**\n * 获取 tagsView 路由列表 store 对象的实例。\n */\nconst storesTagsViewRoutes = useTagsViewRoutes();\nconst { favoriteRoutes } = storeToRefs(storesTagsViewRoutes); // 将 tagView 路由列表转换为 Ref 对象\n\n/**\n * 点击跳转链接触发事件的回调函数。\n * @param path - 需要跳转的路径。\n */\nconst handleRoute = (path: string) => {\n\trouter.push(path); // 跳转到指定路由页面\n};\n\n/**\n * 关闭收藏路由的事件回调函数。\n * @param item - 需要删除的路由信息。\n */\nconst handleCloseFavorite = (item: any) => {\n\tstoresTagsViewRoutes.delFavoriteRoutes(item); // 从收藏路由列表中删除指定路由\n};\n</script>\n\n<style lang=\"scss\" scoped>\n.shortcutCard {\n\tposition: relative;\n\t.shortcutCardClose {\n\t\tposition: absolute;\n\t\ttop: 0;\n\t\tright: 30%;\n\t\tfont-weight: 700;\n\t\tfont-size: 20px;\n\t\tcursor: pointer;\n\t\tcolor: #6d6b6b;\n\t}\n}\n</style>\n"
+        }
+    ]
+}

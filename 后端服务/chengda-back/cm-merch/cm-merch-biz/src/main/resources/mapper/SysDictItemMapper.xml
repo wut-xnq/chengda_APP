@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.SysDictItemMapper">
+
+	<select id="getItemListByDictType" resultType="com.jiaolong.cm.merch.api.dto.DictItemDto"
+			parameterType="java.lang.String">
+		select id, dict_id, dict_type, item_value, label, description, sort_order
+		from sys_dict_item where del_flag = '0' and dict_type = #{dictType}
+		order by sort_order asc
+	</select>
+
+	<select id="getItemListByDictId" resultType="com.jiaolong.cm.merch.api.dto.DictItemDto"
+			parameterType="java.lang.Long">
+		select id, dict_id, dict_type, item_value, label, description, sort_order
+		from sys_dict_item where del_flag = '0' and dict_id = #{dictId}
+		order by sort_order asc
+	</select>
+</mapper>

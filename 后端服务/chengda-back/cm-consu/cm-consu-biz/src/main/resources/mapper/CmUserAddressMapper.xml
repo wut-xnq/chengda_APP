@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmUserAddressMapper">
+
+	<select id="getUserAddressList" resultType="com.jiaolong.cm.consu.api.dto.UserAddressDto"
+            parameterType="java.lang.Long">
+		select a.id,a.user_id,a.create_time,a.concat_person,a.contact_phone,a.province_code,
+		       a.city_code,a.country_code,a.address,a.if_default,a.state,a.update_time,a.deleted,
+		       concat(c1.city_name,c2.city_name,c3.city_name,a.address) as fullAddress
+		from cm_user_address a
+		left join city_code c1 on a.province_code = c1.city_id
+		left join city_code c2 on a.city_code = c2.city_id
+		left join city_code c3 on a.country_code = c3.city_id
+		where a.deleted = '0' and a.state = '1' and a.user_id = #{userId}
+	</select>
+
+	<select id="getUserAddressById" resultType="com.jiaolong.cm.consu.api.dto.UserAddressDto"
+			parameterType="java.lang.Long">
+		select a.id,a.user_id,a.create_time,a.concat_person,a.contact_phone,a.province_code,
+			   a.city_code,a.country_code,a.address,a.if_default,a.state,a.update_time,a.deleted,
+			   concat(c1.city_name,c2.city_name,c3.city_name,a.address) as fullAddress
+		from cm_user_address a
+		left join city_code c1 on a.province_code = c1.city_id
+		left join city_code c2 on a.city_code = c2.city_id
+		left join city_code c3 on a.country_code = c3.city_id
+		where a.deleted = '0' and a.state = '1' and a.id = #{id}
+	</select>
+
+	<select id="getDefaultUserAddressByUserId" resultType="com.jiaolong.cm.consu.api.dto.UserAddressDto">
+		select a.id,a.user_id,a.create_time,a.concat_person,a.contact_phone,a.province_code,
+			   a.city_code,a.country_code,a.address,a.if_default,a.state,a.update_time,a.deleted,
+			   concat(c1.city_name,c2.city_name,c3.city_name,a.address) as fullAddress
+		from cm_user_address a
+		left join city_code c1 on a.province_code = c1.city_id
+		left join city_code c2 on a.city_code = c2.city_id
+		left join city_code c3 on a.country_code = c3.city_id
+		where a.deleted = '0' and a.if_default = '1' and a.state = '1' and a.user_id = #{userId}
+	</select>
+
+    <select id="countAvailableUserAddressByUserId" resultType="java.lang.Integer"
+            parameterType="java.lang.Long">
+		select count(*) from cm_user_address where state = '1' and deleted = '0' and user_id = #{userId}
+	</select>
+
+	<update id="clearOtherDefaultAddress" parameterType="java.lang.Long">
+		update cm_user_address set if_default = '0' where user_id = #{userId}
+	</update>
+</mapper>

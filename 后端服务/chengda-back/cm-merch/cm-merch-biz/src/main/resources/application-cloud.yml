@@ -1,0 +1,24 @@
+server:
+  port: 7200
+
+spring:
+  application:
+    name: merch
+  cloud:
+    nacos:
+      username: @nacos.username@
+      password: @nacos.password@
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: cloud
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: cloud
+  config:
+    import:
+      - nacos:application.yml
+      - nacos:${spring.application.name}.yml
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB

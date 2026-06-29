@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmUserVerifiedMapper">
+
+	<select id="getUserVerifiedPage" resultType="com.jiaolong.cm.merch.api.dto.UserVerifiedDto">
+		select cuv.id, cuv.create_time, cuv.user_id, cuv.merchant_id, cuv.operator_id, cuv.verified_state,
+		       cuv.update_time, cuv.remarks, su.phone, cuv.name_last_char as username
+		from cm_user_verified cuv
+		left join cm_customer su on cuv.user_id = su.user_id
+		where cuv.deleted = '0'
+		<if test="vo.merchantId != null">
+			and cuv.merchant_id = #{vo.merchantId}
+		</if>
+		<if test="vo.verifiedState != null">
+			and cuv.verified_state = #{vo.verifiedState}
+		</if>
+		<if test="vo.phone != null and vo.phone != ''">
+			and su.phone = #{vo.phone}
+		</if>
+		order by cuv.update_time desc
+	</select>
+
+	<update id="deleteUserVerifiedById">
+		update cm_user_verified set deleted = '1' where id = #{id}
+	</update>
+
+	<update id="deleteUserVerifiedByUserId">
+		update cm_user_verified set deleted = '1' where user_id in
+		<foreach collection="userIds" item="userId" open="(" close=")" index="i" separator=",">
+			#{userId}
+		</foreach>
+	</update>
+</mapper>

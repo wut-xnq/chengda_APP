@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/i18n/pages/login/en.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1726892860996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1726892860996,
+            "name": "Commit-0",
+            "content": "export default {\n\tlabel: {\n\t\tone1: 'Admin Account login',\n\t\ttwo2: 'SMS login',\n\t\tthree3: 'Social login',\n\t\tfour4: 'Merchant Account login',\n\t\tregister: 'Create account',\n\t},\n\tlink: {\n\t\tone3: 'Third party login',\n\t\ttwo4: 'Links',\n\t},\n\tpassword: {\n\t\taccountPlaceholder1: 'The username \"admin\" is common, please use another',\n\t\taccountPlaceholder2: 'Password',\n\t\taccountPlaceholder3: 'Please enter the verification code',\n\t\tphonePlaceholder4: 'Please enter your phone number',\n\t\taccountBtnText: 'Sign in',\n\t\tregisterBtnText: 'Create account',\n\t\treadAccept: 'I have read and accept',\n\t\tprivacyPolicy: 'the Privacy Policy',\n\t},\n\tmobile: {\n\t\tplaceholder1: 'Please enter your mobile number',\n\t\tplaceholder2: 'Please enter the verification code',\n\t\tcodeText: 'Get verification code',\n\t\tbtnText: 'Sign in',\n\t},\n\tscan: {\n\t\ttext: 'Use your mobile device to scan and quickly log in or create an account',\n\t\twechatApp: 'Scan with WeChat app for quick access',\n\t},\n\tsignInText: 'Welcome back!',\n\ttenant_guide: {\n\t\ttitle: 'Please select a tenant by clicking here',\n\t\tdescription: 'You only need to select a tenant once for future use',\n\t},\n\tbrowserMsgText:\n\t\t'Tip: For best results, we recommend using Google Chrome, Microsoft Edge (version 79.0.1072.62 or higher), or the 360 browser with speed mode enabled.',\n};\n"
+        }
+    ]
+}

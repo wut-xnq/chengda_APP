@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmOrderPaymentMapper">
+
+	<select id="countOrderNo" resultType="java.lang.Integer">
+		select count(*) from cm_order_payment where payment_no = #{paymentNo}
+	</select>
+
+	<select id="countFlowNo" resultType="java.lang.Integer">
+		select count(*) from cm_order_payment where trade_flow_no = #{flowNo}
+	</select>
+
+	<select id="getOrderByNo" resultType="com.jiaolong.cm.consu.api.entity.CmOrderPayment">
+		select id, payment_no, shopping_order_no, user_charge_account, merchant_charge_account, create_time,
+		       amount, trade_state, trade_flow_no, deleted
+		from cm_order_payment where payment_no = #{orderNo}
+	</select>
+</mapper>

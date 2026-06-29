@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.admin.mapper.CmMerchantInfoMapper">
+
+	<select id="getMerchantPage" resultType="com.jiaolong.cm.merch.api.dto.MerchantInfoDto">
+		select a.id, a.merchant_name, a.charge_person_name, a.charge_person_phone, a.logo, a.credit_code,
+			   a.province_code, a.city_code, a.country_code, a.address, a.staff_count, a.merchant_score, a.state,
+			   concat(c1.city_name, c2.city_name, c3.city_name, a.address) as fullAddress
+		from cm_merchant_info a
+		left join city_code c1 on a.province_code = c1.city_id
+		left join city_code c2 on a.city_code = c2.city_id
+		left join city_code c3 on a.country_code = c3.city_id
+		where a.deleted = '0'
+		<if test="vo.merchantId != null">
+			and a.id = #{vo.merchantId}
+		</if>
+		<if test="vo.merchantName != null and vo.merchantName != ''">
+			and a.merchant_name like concat('%', #{vo.merchantName}, '%')
+		</if>
+		<if test="vo.verified != null and vo.verified != ''">
+			and a.verified = #{vo.verified}
+		</if>
+	</select>
+
+	<select id="getMerchantInfoById" resultType="com.jiaolong.cm.merch.api.dto.MerchantInfoDto">
+		select a.id, a.merchant_name, a.charge_person_name, a.charge_person_phone, a.logo, a.credit_code,
+			   a.province_code, a.city_code, a.country_code, a.address, a.staff_count, a.merchant_score, a.state,
+			   concat(c1.city_name, c2.city_name, c3.city_name, a.address) as fullAddress
+		from cm_merchant_info a
+		left join city_code c1 on a.province_code = c1.city_id
+		left join city_code c2 on a.city_code = c2.city_id
+		left join city_code c3 on a.country_code = c3.city_id
+		where a.id = #{id}
+	</select>
+
+	<update id="disabled">
+		update cm_merchant_info set state = #{state} where id = #{id}
+	</update>
+
+	<update id="deleteMerchantById">
+		update cm_merchant_info set deleted = '1' where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+
+	<select id="selectNameList" resultType="java.lang.String">
+		select merchant_name from cm_merchant_info where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+
+	<select id="getCheckedMerchantList" resultType="com.jiaolong.cm.admin.api.dto.MerchantDto">
+		select a.id as merchantId, a.merchant_name as merchantName
+		from cm_merchant_info a where a.deleted = '0' and a.state = '1'
+	</select>
+</mapper>

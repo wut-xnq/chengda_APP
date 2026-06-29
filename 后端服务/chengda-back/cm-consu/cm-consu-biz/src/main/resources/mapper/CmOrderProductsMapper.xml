@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmOrderProductsMapper">
+
+    <select id="getOrderProductListByOrderId" resultType="com.jiaolong.cm.consu.api.dto.OrderProductDto"
+            parameterType="java.lang.Long">
+		select op.id, op.create_time, op.order_id, op.sku_id, op.amount, op.product_name, op.spec_name, op.deleted,
+		       cps.sku_name, cps.origin_price, cps.current_price, cps.sku_pics, cps.product_id
+		from cm_order_products op
+		left join cm_product_sku cps on op.sku_id = cps.id
+		where op.deleted = '0' and op.order_id = #{orderId}
+	</select>
+
+    <select id="getOrderProductNameList" resultType="com.jiaolong.cm.consu.api.dto.ProductNameDto">
+		select cp.id as productId, cp.product_name, cp.product_pics
+		from cm_order_products op
+		left join cm_product_sku cps on op.sku_id = cps.id
+		left join cm_product cp on cps.product_id = cp.id
+		where op.deleted = '0' and op.order_id = #{orderId}
+	</select>
+</mapper>

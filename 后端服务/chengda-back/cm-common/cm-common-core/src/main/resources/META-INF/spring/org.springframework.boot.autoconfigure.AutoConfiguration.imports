@@ -1,0 +1,6 @@
+com.jiaolong.cm.common.core.config.TaskExecutorConfiguration
+com.jiaolong.cm.common.core.config.JacksonConfiguration
+com.jiaolong.cm.common.core.config.RedisTemplateConfiguration
+com.jiaolong.cm.common.core.config.RestTemplateConfiguration
+com.jiaolong.cm.common.core.util.SpringContextHolder
+com.jiaolong.cm.common.core.config.WebMvcConfiguration

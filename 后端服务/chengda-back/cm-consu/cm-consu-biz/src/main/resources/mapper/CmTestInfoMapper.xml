@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmTestInfoMapper">
+
+	<select id="selectListPage" resultType="com.jiaolong.cm.consu.api.dto.TestInfoDto">
+		select id, file_type, test_time, file_title, content, create_time, update_time as publishDate,
+		       test_product_ids, test_merchant_ids, relation_file_ids, agency_name, remarks
+		from cm_test_info
+		where deleted = '0'
+		<if test="param.fileTitle != null and param.fileTitle != ''">
+			and file_title like concat('%', #{param.fileTitle}, '%')
+		</if>
+		<if test="param.startTime != null">
+			and create_time &gt;= #{param.startTime}
+		</if>
+		<if test="param.endTime != null">
+			and create_time &lt; #{param.endTime}
+		</if>
+		order by update_time desc
+	</select>
+
+	<select id="selectByProductId" resultType="com.jiaolong.cm.consu.api.dto.TestInfoDto">
+		select id, file_type, test_time, file_title, content, create_time, update_time as publishDate,
+		       test_product_ids, test_merchant_ids, relation_file_ids, agency_name, remarks
+		from cm_test_info
+		where deleted = '0' and find_in_set(#{productId}, test_product_ids)
+		order by update_time desc limit 1
+	</select>
+
+	<select id="selectListByMerchantId" resultType="com.jiaolong.cm.consu.api.dto.TestInfoDto">
+		select id, file_type, test_time, file_title, content, create_time, update_time as publishDate,
+			   test_product_ids, test_merchant_ids, relation_file_ids, agency_name, remarks
+		from cm_test_info
+		where deleted = '0' and find_in_set(#{merchantId}, test_merchant_ids)
+		order by update_time desc
+	</select>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CityCodeMapper">
+
+	<select id="getAllList" resultType="com.jiaolong.cm.merch.api.dto.CityCodeDto">
+		select city_id, city_pid, city_name, create_time, type from city_code
+	</select>
+
+	<select id="getChildrenList" resultType="com.jiaolong.cm.merch.api.entity.CityCode">
+		select city_id, city_pid, city_name, create_time, type from city_code where city_pid = #{cityPid}
+	</select>
+    <select id="getListByIds" resultType="com.jiaolong.cm.merch.api.dto.CityCodeDto">
+		select city_id, city_pid, city_name, create_time, type from city_code where city_id in
+		<foreach collection="cityIds" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</select>
+</mapper>

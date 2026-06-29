@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmLogisticsMapper">
+
+	<select id="getPageList" resultType="com.jiaolong.cm.merch.api.dto.LogisticsDto">
+		select cml.id, cml.merchant_id, cml.create_time, cml.logistic_name, cml.region, cml.charge_type, cml.weight, cml.price,
+			cml.second_weight, cml.second_price, cml.if_default, cml.state, cmi.merchant_name as merchantName
+		from cm_merchant_logistics cml left join cm_merchant_info cmi on cml.merchant_id = cmi.id
+		where cml.deleted = '0' and cmi.deleted = '0'
+		<if test="vo.merchantId != null">
+			and cml.merchant_id = #{vo.merchantId}
+		</if>
+		<if test="vo.state != null and vo.state != ''">
+			and cml.state = #{vo.state}
+		</if>
+		<if test="vo.logisticName != null and vo.logisticName != ''">
+			and cml.logistic_name like concat('%', #{vo.logisticName}, '%')
+		</if>
+		order by cml.create_time desc
+	</select>
+
+	<update id="deleteLogisticById">
+		update cm_merchant_logistics set deleted = '1' where id in
+		<foreach collection="ids" index="i" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+</mapper>

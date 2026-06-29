@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmProductLabelMapper">
+
+	<select id="selectListByProductId" resultType="com.jiaolong.cm.consu.api.dto.ProductLabelDto"
+			parameterType="java.lang.Long">
+		select cl.id, cl.label_name, cl.label_code, cl.merchant_id, cl.create_time, cl.update_time, cl.state,
+		       cmi.merchant_name
+		from cm_product_label cpl
+		left join cm_label cl on cpl.label_id = cl.id
+		left join cm_merchant_info cmi on cl.merchant_id = cmi.id
+		where cl.state = '1' and cl.deleted = '0' and cpl.product_id = #{productId}
+	</select>
+</mapper>

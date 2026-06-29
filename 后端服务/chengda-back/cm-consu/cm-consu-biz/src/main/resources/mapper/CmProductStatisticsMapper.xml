@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmProductStatisticsMapper">
+
+	<select id="getByProductId" resultType="com.jiaolong.cm.consu.api.entity.CmProductStatisticsTrend">
+		select id, product_id, view_amount, order_amount, collect_amount, cart_amount, update_time
+		from cm_product_statistics_trend where product_id = #{productId}
+	</select>
+
+	<update id="updateViewAmount" parameterType="com.jiaolong.cm.consu.api.entity.CmProductStatisticsTrend">
+		update cm_product_statistics_trend set view_amount = #{trend.viewAmount}
+		where id = #{trend.id}
+	</update>
+
+	<update id="updateOrderAmount" parameterType="com.jiaolong.cm.consu.api.entity.CmProductStatisticsTrend">
+		update cm_product_statistics_trend set order_amount = #{trend.orderAmount}
+		where id = #{trend.id}
+	</update>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmMerchantInfoMapper">
+
+	<select id="getMerchantListByPhone" resultType="com.jiaolong.cm.merch.api.dto.MerchantInfoDto">
+		select a.id, a.merchant_name, a.charge_person_name, a.charge_person_phone, a.logo, a.credit_code,
+			   a.province_code, a.city_code, a.country_code, a.address, a.staff_count, a.merchant_score, a.verified,
+			   concat(c1.city_name, c2.city_name, c3.city_name, a.address) as fullAddress
+		from cm_merchant_info a
+		left join city_code c1 on a.province_code = c1.city_id
+		left join city_code c2 on a.city_code = c2.city_id
+		left join city_code c3 on a.country_code = c3.city_id
+		where a.deleted = '0' and a.state = '1' and a.charge_person_phone = #{phone}
+	</select>
+
+	<select id="getMerchantInfoById" resultType="com.jiaolong.cm.merch.api.dto.MerchantInfoDto"
+			parameterType="java.lang.Long">
+		select a.id, a.merchant_name, a.charge_person_name, a.charge_person_phone, a.logo, a.credit_code,
+			   a.province_code, a.city_code, a.country_code, a.address, a.staff_count, a.merchant_score, a.verified,
+			   concat(c1.city_name, c2.city_name, c3.city_name, a.address) as fullAddress
+		from cm_merchant_info a
+		left join city_code c1 on a.province_code = c1.city_id
+		left join city_code c2 on a.city_code = c2.city_id
+		left join city_code c3 on a.country_code = c3.city_id
+		where a.deleted = '0' and a.state = '1' and a.id = #{id}
+	</select>
+
+	<select id="getMerchantIdByPhone" resultType="java.lang.Long" parameterType="java.lang.String">
+		select id from cm_merchant_info where charge_person_phone = #{phone}
+	</select>
+
+    <select id="getMerchantInfoByPhone" resultType="com.jiaolong.cm.merch.api.dto.StatisticMerchantInfoDto">
+		select id, merchant_name, merchant_score, logo from cm_merchant_info where charge_person_phone = #{phone}
+	</select>
+</mapper>

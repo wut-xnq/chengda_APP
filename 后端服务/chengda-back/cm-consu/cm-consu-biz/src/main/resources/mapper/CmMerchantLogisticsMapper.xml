@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmMerchantLogisticsMapper">
+
+
+	<select id="getDefaultLogisticsByMerchantId"
+			resultType="com.jiaolong.cm.consu.api.entity.CmMerchantLogistics">
+		select id, merchant_id, create_time, logistic_name, region, charge_type, weight, price, second_weight, second_price, if_default, state, update_time, deleted
+		from cm_merchant_logistics
+		where deleted = '0' and if_default = '1' and merchant_id = #{merchantId}
+	</select>
+</mapper>

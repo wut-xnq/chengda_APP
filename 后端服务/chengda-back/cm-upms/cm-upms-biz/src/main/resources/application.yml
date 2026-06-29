@@ -1,0 +1,29 @@
+server:
+  port: 4000
+
+spring:
+  application:
+    name: upms
+  cloud:
+    nacos:
+      username: @nacos.username@
+      password: @nacos.password@
+      discovery:
+        server-addr: ${NAC0S HOST:cm-register}:${NACOS PORT:8848}
+        namespace: @profiles.active@
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: @profiles.active@
+  config:
+    import:
+      - nacos:application.yml
+      - nacos:${spring.application.name}.yml
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+cm:
+  alipay:
+    rate: 0.6
+  wechatpay:
+    rate: 0.6

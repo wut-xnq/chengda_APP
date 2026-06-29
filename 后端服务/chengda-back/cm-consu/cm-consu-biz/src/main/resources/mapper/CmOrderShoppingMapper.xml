@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.consu.mapper.CmOrderShoppingMapper">
+
+	<select id="selectOrderPage" resultType="com.jiaolong.cm.consu.api.dto.ShoppingOrderDto">
+		select cos.id, cos.create_time, cos.order_no, cos.user_id, cos.merchant_id, cos.user_address_id, cos.order_products, cos.total_price, cos.order_welfares,
+		       cos.deliver_price, cos.real_price, cos.state, cos.payment_type, cos.payment_state, cos.update_time, cos.remarks, cmi.merchant_name, cmi.logo, col.logistics_no,
+		       col.logistics_name, cua.concat_person, cua.contact_phone, cua.address, concat(c1.city_name,c2.city_name,c3.city_name,cua.address) as fullAddress
+		from cm_order_shopping cos
+		left join cm_merchant_info cmi on cos.merchant_id = cmi.id
+		left join cm_order_logistics col on cos.order_no = col.shopping_order_no
+		left join cm_user_address cua on cos.user_address_id = cua.id
+		left join city_code c1 on cua.province_code = c1.city_id
+		left join city_code c2 on cua.city_code = c1.city_id
+		left join city_code c3 on cua.country_code = c1.city_id
+		where cos.deleted = '0'
+		<if test="param.userId != null">
+			and cos.user_id = #{param.userId}
+		</if>
+		<if test="param.paymentState != null">
+			and cos.payment_state = #{param.paymentState}
+		</if>
+		<if test="param.state != null">
+			and cos.state = #{param.state}
+		</if>
+		order by cos.update_time desc, cos.create_time desc
+	</select>
+
+	<update id="delOrderByIds">
+		update cm_order_shopping set deleted = '1' where id in
+			<foreach collection="ids" item="id" separator="," open="(" close=")" index="i">
+				#{id}
+			</foreach>
+	</update>
+
+	<update id="receiveOrder" parameterType="java.lang.Long">
+		update cm_order_shopping set state = 3, payment_state = 3 where id = #{id}
+	</update>
+
+	<select id="countOrderNo" resultType="java.lang.Integer">
+		select count(*) from cm_order_shopping where order_no = #{orderNo}
+	</select>
+
+	<select id="getOrderByNo" resultType="com.jiaolong.cm.consu.api.entity.CmOrderShopping">
+		select id, create_time, order_no, user_id, merchant_id, user_address_id, order_products, order_welfares,
+		       total_price, deliver_price, real_price, state, payment_type, payment_state, update_time, deleted, remarks
+		from cm_order_shopping where order_no = #{orderNo}
+	</select>
+</mapper>

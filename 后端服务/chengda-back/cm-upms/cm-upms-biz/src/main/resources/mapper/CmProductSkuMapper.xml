@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.admin.mapper.CmProductSkuMapper">
+
+
+	<select id="getSkuListByProductId" resultType="com.jiaolong.cm.merch.api.dto.ProductSkuDto">
+		select cps.id, cps.sku_code, cps.sku_name, cps.product_id, cps.create_time, cps.origin_price, cps.current_price, cps.sku_pics, cps.amount,
+			   cps.limit_amount, cps.state, cps.if_default, cps.update_time, cps.sort_order, cps.remarks, cmi.merchant_name as merchantName
+		from cm_product_sku cps
+		left join cm_product cp on cps.product_id = cp.id
+		left join cm_merchant_info cmi on cp.merchant_id = cmi.id
+		where cps.deleted = '0' and cps.product_id = #{productId}
+	</select>
+</mapper>

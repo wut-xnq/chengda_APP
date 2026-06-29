@@ -1,0 +1,23 @@
+export default {
+	spec: {
+		index: '#',
+		id: '规格编号',
+		specName: '规格名称',
+		groupName: '规格组',
+		state: '状态',
+		merchantName: '所属公司',
+		shelveArea: '商品上架区域',
+		price: '价格',
+		brandName: '商品品牌',
+		productPics: '商品主图',
+		productLabelList: '商品标签',
+		createBy: '创建人',
+		updateBy: '修改人',
+		createTime: '创建时间',
+		updateTime: '更新时间',
+		inputResourceIdsTip: '请输入',
+		yes: '启用',
+		no: '禁用',
+		inputTip: '请输入',
+	},
+};

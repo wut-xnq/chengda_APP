@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiaolong.cm.merch.mapper.CmLabelMapper">
+
+	<select id="getLabelPage" resultType="com.jiaolong.cm.merch.api.dto.LabelDto">
+		select cl.id, cl.label_name, cl.label_code, cl.merchant_id, cl.create_time, cl.update_time, cl.state,
+		       cmi.merchant_name as merchantName
+		from cm_label cl left join cm_merchant_info cmi on cl.merchant_id = cmi.id
+		where cl.deleted = '0' and cmi.deleted = '0'
+		<if test="vo.merchantId != null">
+			and cl.merchant_id = #{vo.merchantId}
+		</if>
+		<if test="vo.labelCode != null and vo.labelCode != ''">
+			and cl.label_code = #{vo.labelCode}
+		</if>
+		<if test="vo.labelName != null and vo.labelName != ''">
+			and cl.label_name like concat('%', #{vo.labelName}, '%')
+		</if>
+		<if test="vo.state != null and vo.state != ''">
+			and cl.state = #{vo.state}
+		</if>
+		order by cl.create_time desc
+	</select>
+
+	<select id="getLabelListByProductId" resultType="com.jiaolong.cm.merch.api.dto.LabelDto"
+			parameterType="java.lang.Long">
+		select cl.id, cl.label_name, cl.label_code, cl.merchant_id, cl.create_time, cl.update_time, cl.state,
+			   cmi.merchant_name as merchantName
+		from cm_product_label cpl
+		left join cm_label cl on cpl.label_id = cl.id
+		left join cm_merchant_info cmi on cl.merchant_id = cmi.id
+		where cl.deleted = '0' and cl.state = '1' and cmi.deleted = '0' and cpl.product_id = #{productId}
+		order by cl.create_time desc
+	</select>
+
+    <select id="getMerchantLabelList" resultType="com.jiaolong.cm.merch.api.dto.LabelDto">
+		select cl.id, cl.label_name, cl.label_code, cl.merchant_id, cl.create_time, cl.update_time, cl.state, cmi.merchant_name
+		from cm_label cl
+		left join cm_merchant_info cmi on cl.merchant_id = cmi.id
+		where cl.deleted = '0' and cl.state = '1' and cmi.deleted = '0' and cl.merchant_id = #{merchantId}
+		order by cl.create_time desc
+	</select>
+
+    <update id="deleteLabelByIds">
+		update cm_label set deleted = '1' where id in
+		<foreach collection="ids" item="id" index="i" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</update>
+</mapper>
