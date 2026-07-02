@@ -24,6 +24,8 @@ export default {
     nimSdk?.offlinePush?.updateAppBackground({
       isBackground: false,
     });
+    // 从后台切回前台时，主动检查 IM 连接状态，断开则立即重连
+    this.checkAndReconnectIM();
     // #endif
   },
   onHide() {
@@ -86,6 +88,23 @@ export default {
 		// 处理修改文件app无法正常登出
 		this.initNim(imOptions);
 		console.log("启动成功", imOptions);
+	},
+	/**
+	 * 检查 IM 连接状态，断开时主动重连
+	 */
+	checkAndReconnectIM() {
+		// @ts-ignore
+		if (!uni.$UIKitStore || !uni.$UIKitNIM) {
+			// IM 未初始化或已销毁（如退出登录后），不重连
+			return;
+		}
+		const connectState = uni.$UIKitStore?.connectStore?.connectState;
+		console.log("切回前台，IM连接状态:", connectState);
+		if (connectState !== "connected") {
+			console.log("IM 未连接，尝试重连...");
+			// @ts-ignore
+			uni.$UIKitNIM.connect();
+		}
 	},
     initNim(opts: { account: string; token: string }) {
 		// #ifdef APP-PLUS
