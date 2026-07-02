@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cm-consu-biz" />
+        <module name="cm-upms-biz" />
+        <module name="cm-common-swagger" />
+        <module name="cm-consu-api" />
+        <module name="cm-common-mybatis" />
+        <module name="cm-common-feign" />
+        <module name="cm-common-seata" />
+        <module name="cm-common-log" />
+        <module name="cm-merch-api" />
+        <module name="cm-common-xss" />
+        <module name="cm-common-core" />
+        <module name="cm-gateway" />
+        <module name="cm-common-datasource" />
+        <module name="cm-merch-biz" />
+        <module name="cm-auth" />
+        <module name="cm-common-oss" />
+        <module name="cm-common-security" />
+        <module name="cm-upms-api" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cm" options="-parameters" />
+      <module name="cm-auth" options="-parameters" />
+      <module name="cm-common" options="-parameters" />
+      <module name="cm-common-core" options="-parameters" />
+      <module name="cm-common-datasource" options="-parameters" />
+      <module name="cm-common-feign" options="-parameters" />
+      <module name="cm-common-log" options="-parameters" />
+      <module name="cm-common-mybatis" options="-parameters" />
+      <module name="cm-common-oss" options="-parameters" />
+      <module name="cm-common-seata" options="-parameters" />
+      <module name="cm-common-security" options="-parameters" />
+      <module name="cm-common-swagger" options="-parameters" />
+      <module name="cm-common-xss" options="-parameters" />
+      <module name="cm-consu" options="-parameters" />
+      <module name="cm-consu-api" options="-parameters" />
+      <module name="cm-consu-biz" options="-parameters" />
+      <module name="cm-gateway" options="-parameters" />
+      <module name="cm-merch" options="-parameters" />
+      <module name="cm-merch-api" options="-parameters" />
+      <module name="cm-merch-biz" options="-parameters" />
+      <module name="cm-upms" options="-parameters" />
+      <module name="cm-upms-api" options="-parameters" />
+      <module name="cm-upms-biz" options="-parameters" />
+    </option>
+  </component>
+</project>

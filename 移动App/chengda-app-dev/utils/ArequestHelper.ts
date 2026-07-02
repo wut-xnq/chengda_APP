@@ -50,7 +50,11 @@ export async function authenticate(phone: string, inviteCode: string): Promise<a
 export async function refreshToken(phone: string, access_token: string): Promise<any> {
     try {
 		const firstLoginUser = uni.getStorageSync("firstLoginUser");
-		const token = firstLoginUser.access_token
+		const token = firstLoginUser?.access_token;
+		if (!token) {
+			console.error('未找到 access_token，请先登录');
+			throw new Error('登录信息丢失，请重新登录');
+		}
 		
         const response = await uni.request({
             // url: baseUrl + '/consu/sms/refreshToken?phone='+phone,

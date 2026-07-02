@@ -196,36 +196,7 @@
 			    });
 			    return;
 			  }
-			if (null != loginForm.phone && loginForm.phone == '18095129829') {
-				console.log("免登录测试");
-				// 上架逻辑，免验证码校验，直接登录
-				// 登录购物后台
-				const secondResponse = await authenticate(
-					loginForm.phone,
-					loginForm.inviteCode
-				);
-				
-				if (secondResponse.data.code === 1) {
-					throw new Error(secondResponse.data.msg)
-				}
-				unreadSysMsgCount.value = secondResponse.data;
-				console.log("客户端手机登录", secondResponse);
-				// 登录成功后,网易云信检验登录注册
-				if (secondResponse.data && secondResponse.data.access_token) {
-					const userIfResponse = await refreshToken(
-						loginForm.phone,
-						secondResponse.data.access_token
-					);
-					console.log("返回数据", userIfResponse);
-				
-					const app = getApp();
-					app.initNim({
-						account: userIfResponse.data.data.accid,
-						token: userIfResponse.data.data.token,
-					});
-				}
-			}
-			phoneRef.value.handleBlur()
+				phoneRef.value.handleBlur()
 			codeRef.value.handleBlur()
 			code2Ref.value.handleBlur()
 
@@ -257,11 +228,18 @@
 					);
 					console.log("返回数据", userIfResponse);
 
+					// 安全地获取 accid 和 token，兼容多层嵌套结构
 					const app = getApp();
-					app.initNim({
-						account: userIfResponse.data.data.accid,
-						token: userIfResponse.data.data.token,
-					});
+					const resData = userIfResponse?.data?.data?.data || userIfResponse?.data?.data || userIfResponse?.data || {};
+
+					if (resData.accid && resData.token) {
+						app.initNim({
+							account: resData.accid,
+							token: resData.token,
+						});
+					} else {
+						console.warn("网易云信登录信息缺失，IM将无法使用", resData);
+					}
 				}
 			} else {
 				throw new Error(response.data.msg);

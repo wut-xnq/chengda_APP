@@ -58,19 +58,12 @@
 	// 退出目前自己的平台
 	const chengdaBackstage = () => {
 		console.log("退出目前自己的平台");
-		const { access_token } = uni.getStorageSync("firstLoginUser");
-		console.log("access_token", access_token);
-		if (access_token) {
-			uni.reLaunch({
-				url: "/pages/Login/index",
-			});
-			// 清除所有缓存
-			uni.clearStorage();
-			// 检查是否清除成功
-			const clearResult = uni.clearStorageSync();
-			console.log("清除结果：", clearResult);
-			console.log("缓存中是否还有数据：", uni.getStorageInfoSync());
-		}
+		// 先清除所有缓存
+		uni.clearStorageSync();
+		// 再跳转登录页
+		uni.reLaunch({
+			url: "/pages/Login/index",
+		});
 	};
 
 	// new

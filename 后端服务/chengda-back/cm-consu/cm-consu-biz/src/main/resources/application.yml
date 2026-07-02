@@ -6,14 +6,14 @@ spring:
     name: consu
   cloud:
     nacos:
-      username: @nacos.username@
-      password: @nacos.password@
+      username: nacos
+      password: V$cRem1J
       discovery:
-        server-addr: ${NAC0S HOST:cm-register}:${NACOS PORT:8848}
-        namespace: @profiles.active@
+        server-addr: ${NACOS_HOST:localhost}:${NACOS_PORT:8848}
+        namespace: cloud
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
-        namespace: @profiles.active@
+        namespace: cloud
   config:
     import:
       - nacos:application.yml

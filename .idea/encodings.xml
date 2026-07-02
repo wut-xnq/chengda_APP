@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-bom/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-bom/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-datasource/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-datasource/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-feign/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-feign/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-log/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-log/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-mybatis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-oss/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-oss/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-seata/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-seata/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-swagger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-swagger/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-xss/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/cm-common-xss/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-consu/cm-consu-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-consu/cm-consu-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-consu/cm-consu-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-consu/cm-consu-biz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-consu/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-consu/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-merch/cm-merch-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-merch/cm-merch-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-merch/cm-merch-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-merch/cm-merch-biz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-merch/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-merch/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-upms/cm-upms-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-upms/cm-upms-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-upms/cm-upms-biz/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-upms/cm-upms-biz/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-upms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/cm-upms/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/后端服务/chengda-back/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../03-App打包/cbdapp.keystore" charset="UTF-8" />
+  </component>
+</project>

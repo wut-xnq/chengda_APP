@@ -42,10 +42,14 @@
 			// if(!userInfo.avatar || !userInfo.avatar.trim()) throw new Error("请上传头像")
 			if(!userInfo.nickname || !userInfo.nickname.trim()) throw new Error("请输入昵称")
 			if(!userInfo.name || !userInfo.name.trim()) throw new Error("请输入真实姓名")
-			// 更新网易云信息
-			const uikUser = uni.$UIKitStore.userStore.myUserInfo
-			let newUik = {avatar: userInfo.avatar,nick:userInfo.nickname ,ext:userInfo.name ,signature:userInfo.brief}
-			await uni.$UIKitStore.userStore.saveMyUserInfoActive({...uikUser,...newUik})
+			// 更新网易云信息（如果 IM 已初始化）
+			if (uni.$UIKitStore && uni.$UIKitStore.userStore) {
+				const uikUser = uni.$UIKitStore.userStore.myUserInfo
+				let newUik = {avatar: userInfo.avatar,nick:userInfo.nickname ,ext:userInfo.name ,signature:userInfo.brief}
+				await uni.$UIKitStore.userStore.saveMyUserInfoActive({...uikUser,...newUik})
+			} else {
+				console.warn("IM 未初始化，跳过网易云信息更新")
+			}
 			// 更新平台个人信息
 			console.log(userInfo)
 			await updateUser(userInfo).then(res=>{

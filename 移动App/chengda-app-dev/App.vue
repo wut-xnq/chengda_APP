@@ -247,11 +247,9 @@ export default {
       if (nimCallKit) {
         nimCallKit.initConfig(
           {
-            appKey: "", // 请填写你的appkey
-            account: "", // 请填写你的account
-            token: "", // 请填写你的token
-            // account: opts.account, // 请填写你的account
-            // token: opts.token, // 请填写你的token
+            appKey: STORAGE_KEY,
+            account: opts.account,
+            token: opts.token,
             apnsCername: "",
             pkCername: "",
           },
@@ -260,11 +258,10 @@ export default {
               console.log("-------------callkit init失败\n错误码：", ret);
             } else {
               console.log("-------------callkit 开始登录------------");
-              //@ts-ignore
               nimCallKit.login(
                 {
-                  account: "", // 请填写你的account
-                  token: "", // 请填写你的token
+                  account: opts.account,
+                  token: opts.token,
                 },
                 function (ret: any) {
                   if (ret.code != 200) {
@@ -292,24 +289,26 @@ export default {
     },
 
     logout() {
-      // @ts-ignore
-      uni.removeStorageSync(STORAGE_KEY);
+      // 先安全地断开 IM 连接
       try {
         // @ts-ignore
-        nimCallKit.logout({}, (ret) => {
-          if (ret.code != 200) {
-            console.log("音视频通话插件退出失败");
-          } else {
-            console.log("音视频通话插件退出成功");
-          }
-        });
-      } catch (error) {
-        console.log("音视频通话插件退出失败", error);
+        if (uni.$UIKitNIM) {
+          uni.$UIKitNIM.disconnect();
+        }
+      } catch (e) {
+        console.log("断开 IM 连接失败", e);
       }
-      // @ts-ignore
-      uni.$UIKitNIM.disconnect();
-      // @ts-ignore
-      uni.$UIKitStore.destroy();
+      try {
+        // @ts-ignore
+        if (uni.$UIKitStore) {
+          uni.$UIKitStore.destroy();
+        }
+      } catch (e) {
+        console.log("销毁 IM Store 失败", e);
+      }
+      // 清除所有缓存
+      uni.clearStorageSync();
+      // 跳转登录页
       customReLaunch({
         url: "/pages/Login/index",
       });
