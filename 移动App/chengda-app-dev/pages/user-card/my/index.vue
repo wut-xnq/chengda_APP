@@ -14,10 +14,6 @@
 			<image class="user-code" src="../../../static/my/my-code.png" @click="userCode"  mode=""></image>
 		</div>
 		<div class="modelBorder">
-			<!-- 视频 -->
-			<uni-link href="https://www.yangshipin.cn/" :showUnderLine="false" color="#000000">
-				<div class="modelsEntrance" @click="centralVideo"></div>
-			</uni-link>
 			<!-- 购物 -->
 			<div class="modelsEntrancetwo" @click="goShopping"></div>
 		</div>
@@ -29,8 +25,6 @@
 	import UserCard from '../../../components/UserCard.vue'
 	import { onUnmounted, ref } from '../../../utils/transformVue'
 	import Icon from '../../../components/Icon.vue'
-	// @ts-ignore
-	import UniLink from '../../../components/uni-components/uni-link/components/uni-link/uni-link.vue'
 	import { autorun } from 'mobx'
 	import { setContactTabUnread, setTabUnread } from '../../../utils/msg'
 	import { customNavigateTo } from '../../../utils/customNavigate'
@@ -103,11 +97,7 @@
 			url: `/pages/user-card/my-detail/index?account=${myUserInfo.value.account}`,
 		})
 	}
-	// 新
-	const centralVideo = () => {
-		console.log("去央视频。。。")
-	}
-	// const goShopping =  async() => {
+	// 购物
 	// 	console.log("去购物。。。")
 
 	// 		customNavigateTo({

@@ -314,7 +314,6 @@ export default {
   Ambulance: '[救护车]',
   Poop: '[便便]',
   // 我的
-  FoodSoil:'央视频',
   ShopCar:'购物',
   // 设置
   DeliveryAddress:'收货地址',

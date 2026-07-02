@@ -125,7 +125,8 @@ export default {
            * 使用固定设备ID，
            */
           isFixedDeviceId: true,
-          // "reconnectionAttempts": 5,
+          "reconnectionAttempts": 10,
+          "reconnectionInterval": 1000,
           debugLevel: "debug",
           // ...opts,
         },
